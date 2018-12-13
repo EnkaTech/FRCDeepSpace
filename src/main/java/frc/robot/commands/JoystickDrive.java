@@ -25,7 +25,8 @@ public class JoystickDrive extends Command {
 
   @Override
   protected void execute() {
-    Robot.driveTrain.drive(Robot.IO.joy1, RobotMap.speedMtp, Robot.IO.joy1.getRawButton(1));
+    Robot.driveTrain.drive(Robot.IO.joy1, Robot.IO.joy1.getRawButton(2) ? RobotMap.slowSpd : RobotMap.fastSpd,
+        Robot.IO.joy1.getRawButton(1));
   }
 
   @Override

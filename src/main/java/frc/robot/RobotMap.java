@@ -33,7 +33,8 @@ public class RobotMap {
   public static SpeedController dtRearRight = new Spark(rearR);
 
   public static MecanumDrive driveTrain;
-  public static double speedMtp = 1;
+  public static double fastSpd = 0.9;
+  public static double slowSpd = 0.4;
   public static boolean isFieldOriented = false;
 
 }
