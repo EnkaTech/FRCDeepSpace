@@ -94,11 +94,11 @@ public class DriveTrain extends Subsystem {
    * @param wantedAngle The angle that the robot is wanted to turn
    */
   public void gyroTurn(ADIS16448_IMU gyro, double wantedAngle) {
-    double angle = gyro.getAngleZ();
+    double angle = gyro.getAngleZ() % 360;
     double power = (wantedAngle - angle) * Kp * 8;
-    if (power > 0)
+    if (power > 0.2)
       power = 0.2;
-    else
+    if (power < -0.2)
       power = -0.2;
 
     Timer.delay(0.0004);
