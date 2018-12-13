@@ -7,16 +7,29 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /**
- * A command to drive the robot with the first joystick
+ * Follows a straight line in the Y axis for a given time period
  */
-public class JoystickDrive extends Command {
-  public JoystickDrive() {
+public class GyroDriveX extends TimedCommand {
+  private boolean fwd;
+  private double angle;
+
+  /**
+   * Follows a straight line in the X axis for a given time period
+   * 
+   * @param timeout Timeout for the command
+   * @param forward Whether to go forward or backward
+   * @param angle   The angle to track
+   */
+  public GyroDriveX(double timeout, boolean forward, double angle) {
+    super(timeout);
     requires(Robot.driveTrain);
+    this.fwd = forward;
+    this.angle = angle;
   }
 
   @Override
@@ -25,12 +38,7 @@ public class JoystickDrive extends Command {
 
   @Override
   protected void execute() {
-    Robot.driveTrain.drive(Robot.IO.joy1, RobotMap.speedMtp, Robot.IO.joy1.getRawButton(1));
-  }
-
-  @Override
-  protected boolean isFinished() {
-    return false;
+    Robot.driveTrain.gyroDriveX(RobotMap.gyro, fwd, angle);
   }
 
   @Override

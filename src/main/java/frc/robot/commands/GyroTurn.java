@@ -11,12 +11,17 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-/**
- * A command to drive the robot with the first joystick
- */
-public class JoystickDrive extends Command {
-  public JoystickDrive() {
+public class GyroTurn extends Command {
+  private double angle;
+
+  /**
+   * Rotates the robot to the specified angle
+   * 
+   * @param angle The angle that the robot is wanted to turn
+   */
+  public GyroTurn(double angle) {
     requires(Robot.driveTrain);
+    this.angle = angle;
   }
 
   @Override
@@ -25,12 +30,12 @@ public class JoystickDrive extends Command {
 
   @Override
   protected void execute() {
-    Robot.driveTrain.drive(Robot.IO.joy1, RobotMap.speedMtp, Robot.IO.joy1.getRawButton(1));
+    Robot.driveTrain.gyroTurn(RobotMap.gyro, angle);
   }
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return Math.abs(angle - RobotMap.gyro.getAngleZ()) > 1;
   }
 
   @Override

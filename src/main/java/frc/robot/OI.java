@@ -10,7 +10,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.ToggleFieldOriented;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -22,6 +21,5 @@ public class OI {
   public Button j1_trig = new JoystickButton(joy1, 1);
 
   public OI() {
-    j1_trig.whenPressed(new ToggleFieldOriented());
   }
 }
