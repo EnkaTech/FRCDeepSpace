@@ -7,6 +7,10 @@
 
 package frc.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -24,7 +28,10 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
  * project.
  */
 public class Robot extends TimedRobot {
+  public static NetworkTable table;
   public static DriveTrain driveTrain = new DriveTrain();
+  public static CameraServer cameraServer;
+  public static UsbCamera camera;
   public static OI IO;
   Timer timer;
   SendableChooser<Integer> autoChooser;
@@ -41,6 +48,10 @@ public class Robot extends TimedRobot {
     autoChooser.addObject("Method 2", 2);
     SmartDashboard.putData("Auto mode", autoChooser);
     RobotMap.gyro.calibrate();
+    cameraServer = CameraServer.getInstance();
+    camera = cameraServer.startAutomaticCapture();
+    camera.setResolution(640, 480);
+    table = NetworkTableInstance.getDefault().getTable("imgproc");
   }
 
   @Override
