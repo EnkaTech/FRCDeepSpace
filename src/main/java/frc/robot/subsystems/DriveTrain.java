@@ -19,7 +19,7 @@ import frc.robot.commands.JoystickDrive;
  * Mecanum drive subsystem
  */
 public class DriveTrain extends Subsystem {
-  private double Kp = 0.02;
+  public double Kp = 0.04;
 
   @Override
   public void initDefaultCommand() {

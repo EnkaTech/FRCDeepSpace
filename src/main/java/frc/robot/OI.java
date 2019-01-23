@@ -10,6 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.Align;
+import frc.robot.commands.ToggleLights;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -18,8 +20,11 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 
   public Joystick joy1 = new Joystick(0);
-  public Button j1_trig = new JoystickButton(joy1, 1);
+  public Button j1_3 = new JoystickButton(joy1, 3);
+  public Button j1_11 = new JoystickButton(joy1, 11);
 
   public OI() {
+    j1_3.whenPressed(new ToggleLights());
+    j1_11.whenPressed(new Align());
   }
 }

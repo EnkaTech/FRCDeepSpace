@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Spark;
 import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -32,14 +33,17 @@ public class RobotMap {
    * Channel 4 - Rear Left Victor SPX
    */
 
-  public static SpeedController dtFrontLeft = new WPI_TalonSRX(1);
-  public static SpeedController dtFrontRight = new WPI_TalonSRX(2);
-  public static SpeedController dtRearLeft = new WPI_VictorSPX(4);
-  public static SpeedController dtRearRight = new WPI_VictorSPX(3);
+  public static SpeedController dtFrontLeft = new WPI_VictorSPX(4);
+  public static SpeedController dtFrontRight = new WPI_TalonSRX(1);
+  public static SpeedController dtRearLeft = new WPI_VictorSPX(3);
+  public static SpeedController dtRearRight = new WPI_TalonSRX(2);
+
+  public static DigitalOutput LEDArray = new DigitalOutput(9);
+  public static boolean lightsOn = false;
 
   public static MecanumDrive driveTrain;
-  public static double fastSpd = 0.9;
-  public static double slowSpd = 0.4;
+  public static double fastSpd = 0.3;
+  public static double slowSpd = 0.2;
   public static boolean isFieldOriented = false;
 
 }

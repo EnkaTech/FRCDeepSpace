@@ -12,7 +12,7 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /**
- * Follows a straight line in the Y axis for a given time period
+ * Follows a straight line in the X axis for a given time period
  */
 public class GyroDriveX extends TimedCommand {
   private boolean fwd;
