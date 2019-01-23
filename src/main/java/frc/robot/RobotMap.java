@@ -8,7 +8,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.DigitalOutput;
-import edu.wpi.first.wpilibj.Spark;
 import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -27,10 +26,10 @@ public class RobotMap {
   public static ADIS16448_IMU gyro = new ADIS16448_IMU();
 
   /**
-   * Channel 1 - Front Left Talon
-   * Channel 2 - Front Right Talon
-   * Channel 3 - Rear Right Victor SPX
-   * Channel 4 - Rear Left Victor SPX
+   * Channel 1 - Front Right Talon
+   * Channel 2 - Rear Right Talon
+   * Channel 3 - Rear Left Victor SPX
+   * Channel 4 - Front Left Victor SPX
    */
 
   public static SpeedController dtFrontLeft = new WPI_VictorSPX(4);
