@@ -7,8 +7,10 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class AlignRotate extends Command {
   float rError;
@@ -23,14 +25,14 @@ public class AlignRotate extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
+    RobotMap.error = Robot.table.getEntry("Rotate error").getNumber(0).floatValue() < 0 ;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
   rError =  Robot.table.getEntry("Rotate error").getNumber(0).floatValue();
-  rPower = (rError*Robot.driveTrain.Kp);
+  rPower = (rError*Robot.driveTrain.Kp)/10;
   if(rPower <= 0.05 && rPower > 0)
     rPower = 0.05;
   else if(rPower >= 0.2)
@@ -45,12 +47,13 @@ public class AlignRotate extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Math.abs(rError) <= 1 ;
+    return Math.abs(rError) <= 40 ;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    
     Robot.driveTrain.drive(0, 0, 0, false);
   }
 

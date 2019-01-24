@@ -39,6 +39,7 @@ public class RobotMap {
 
   public static DigitalOutput LEDArray = new DigitalOutput(9);
   public static boolean lightsOn = false;
+  public static boolean error;
 
   public static MecanumDrive driveTrain;
   public static double fastSpd = 0.3;

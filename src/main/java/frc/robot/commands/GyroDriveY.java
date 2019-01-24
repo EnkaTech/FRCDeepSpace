@@ -38,7 +38,7 @@ public class GyroDriveY extends TimedCommand {
 
   @Override
   protected void execute() {
-    Robot.driveTrain.gyroDriveY(RobotMap.gyro, right, angle);
+    Robot.driveTrain.gyroDriveY(RobotMap.gyro, RobotMap.error, angle);
   }
 
   @Override

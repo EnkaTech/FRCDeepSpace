@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.RobotMap;
 
 public class Align extends CommandGroup {
   /**
@@ -19,6 +20,7 @@ public class Align extends CommandGroup {
     // addSequential(new Command2());
     // these will run in order.
     addSequential(new AlignRotate());
+    addSequential(new GyroDriveY(0.3, RobotMap.error, 0));
     addSequential(new AlignH());
     // To run multiple commands at the same time,
     // use addParallel()

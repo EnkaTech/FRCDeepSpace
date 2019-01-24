@@ -78,7 +78,7 @@ public class DriveTrain extends Subsystem {
    * @param wantedAngle The angle that the robot is wanted to track
    */
   public void gyroDriveY(ADIS16448_IMU gyro, boolean right, double wantedAngle) {
-    double angle = (wantedAngle + gyro.getAngleZ()) * Kp;
+    double angle = /*(wantedAngle + gyro.getAngleZ()) * Kp*/ 0.0;
     if (right)
       drive(0, 0.4, angle, false);
     else
