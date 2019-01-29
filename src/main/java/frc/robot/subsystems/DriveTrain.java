@@ -50,7 +50,7 @@ public class DriveTrain extends Subsystem {
    * @param fieldOriented Whether to drive in field oriented mode
    */
   public void drive(Joystick joy, double mtp, boolean fieldOriented) {
-    drive(-joy.getRawAxis(1) * mtp, joy.getRawAxis(0) * mtp, joy.getRawAxis(2) * mtp, fieldOriented);
+    drive(joy.getRawAxis(1) * mtp, joy.getRawAxis(0) * mtp, joy.getRawAxis(2) * mtp, fieldOriented);
   }
 
   /**
@@ -94,7 +94,7 @@ public class DriveTrain extends Subsystem {
    * @param wantedAngle The angle that the robot is wanted to turn
    */
   public void gyroTurn(ADIS16448_IMU gyro, double wantedAngle) {
-    double angle = gyro.getAngleZ() % 360;
+    double angle = gyro.getAngleZ();
     double power = (wantedAngle - angle) * Kp * 8;
     if (power > 0.2)
       power = 0.2;

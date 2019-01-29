@@ -33,9 +33,9 @@ public class RobotMap {
    */
 
   public static SpeedController dtFrontLeft = new Spark(0);
-  public static SpeedController dtFrontRight = new Spark(8);
+  public static SpeedController dtFrontRight = new Spark(9);
   public static SpeedController dtRearLeft = new Spark(1);
-  public static SpeedController dtRearRight = new Spark(9);
+  public static SpeedController dtRearRight = new Spark(8);
 
   public static DigitalOutput LEDArray = new DigitalOutput(9);
   public static boolean lightsOn = false;

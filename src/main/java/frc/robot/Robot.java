@@ -29,6 +29,7 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
  */
 public class Robot extends TimedRobot {
   public static NetworkTable table;
+  public static NetworkTable gyro;
   public static DriveTrain driveTrain = new DriveTrain();
   public static CameraServer cameraServer;
   public static UsbCamera camera;
@@ -38,7 +39,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    //RobotMap.dtRearRight.setInverted(true);
+    RobotMap.dtFrontLeft.setInverted(true);
+    RobotMap.dtRearLeft.setInverted(true);
     RobotMap.driveTrain = new MecanumDrive(RobotMap.dtFrontLeft, RobotMap.dtRearLeft, RobotMap.dtFrontRight,
         RobotMap.dtRearRight);
     IO = new OI();
@@ -52,10 +54,12 @@ public class Robot extends TimedRobot {
     camera = cameraServer.startAutomaticCapture();
     camera.setResolution(640, 480);
     table = NetworkTableInstance.getDefault().getTable("imgproc");
+    gyro = NetworkTableInstance.getDefault().getTable("gyro");
   }
 
   @Override
   public void robotPeriodic() {
+    SmartDashboard.putNumber("Gyro", RobotMap.gyro.getAngleZ());
   }
 
   @Override

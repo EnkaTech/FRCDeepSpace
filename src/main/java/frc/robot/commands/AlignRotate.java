@@ -31,7 +31,7 @@ public class AlignRotate extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-  rError =  Robot.table.getEntry("Rotate error").getNumber(0).floatValue();
+  rError =  Robot.table.getEntry("Horizontal Error").getNumber(0).floatValue();
   rPower = (rError*Robot.driveTrain.Kp)/10;
   if(rPower <= 0.05 && rPower > 0)
     rPower = 0.05;
