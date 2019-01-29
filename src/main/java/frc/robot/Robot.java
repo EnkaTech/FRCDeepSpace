@@ -38,7 +38,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    RobotMap.dtRearRight.setInverted(true);
+    //RobotMap.dtRearRight.setInverted(true);
     RobotMap.driveTrain = new MecanumDrive(RobotMap.dtFrontLeft, RobotMap.dtRearLeft, RobotMap.dtFrontRight,
         RobotMap.dtRearRight);
     IO = new OI();

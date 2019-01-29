@@ -8,9 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.Spark;
+
 import com.analog.adis16448.frc.ADIS16448_IMU;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
@@ -26,16 +26,16 @@ public class RobotMap {
   public static ADIS16448_IMU gyro = new ADIS16448_IMU();
 
   /**
-   * Channel 1 - Front Right Talon
-   * Channel 2 - Rear Right Talon
-   * Channel 3 - Rear Left Victor SPX
-   * Channel 4 - Front Left Victor SPX
+   * Channel 0 - Front Left
+   * Channel 1 - Rear Left
+   * Channel 8 - Front Right
+   * Channel 9 - Rear Right
    */
 
-  public static SpeedController dtFrontLeft = new WPI_VictorSPX(4);
-  public static SpeedController dtFrontRight = new WPI_TalonSRX(1);
-  public static SpeedController dtRearLeft = new WPI_VictorSPX(3);
-  public static SpeedController dtRearRight = new WPI_TalonSRX(2);
+  public static SpeedController dtFrontLeft = new Spark(0);
+  public static SpeedController dtFrontRight = new Spark(8);
+  public static SpeedController dtRearLeft = new Spark(1);
+  public static SpeedController dtRearRight = new Spark(9);
 
   public static DigitalOutput LEDArray = new DigitalOutput(9);
   public static boolean lightsOn = false;
