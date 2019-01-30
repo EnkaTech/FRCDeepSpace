@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -37,7 +38,7 @@ public class DriveTrain extends Subsystem {
    */
   public void drive(double xSpeed, double ySpeed, double zSpeed, boolean fieldOriented) {
     if (fieldOriented)
-      RobotMap.driveTrain.driveCartesian(ySpeed, xSpeed, zSpeed, RobotMap.gyro.getAngleZ());
+      RobotMap.driveTrain.driveCartesian(ySpeed, xSpeed, zSpeed, RobotMap.gyro.getAngle());
     else
       RobotMap.driveTrain.driveCartesian(ySpeed, xSpeed, zSpeed);
   }
@@ -60,12 +61,12 @@ public class DriveTrain extends Subsystem {
    * @param front       Whether to drive forward or backward
    * @param wantedAngle The angle that the robot is wanted to track
    */
-  public void gyroDriveX(ADIS16448_IMU gyro, boolean front, double wantedAngle) {
-    double angle = (wantedAngle + gyro.getAngleZ()) * Kp;
+  public void gyroDriveX(ADXRS450_Gyro gyro, boolean front, double wantedAngle) {
+    double angle = (wantedAngle - gyro.getAngle()) * Kp;
     if (front)
-      drive(0.4, 0, angle, false);
-    else
       drive(-0.4, 0, angle, false);
+    else
+      drive(0.4, 0, angle, false);
 
     Timer.delay(0.0004);
   }
@@ -77,8 +78,8 @@ public class DriveTrain extends Subsystem {
    * @param right       Whether to drive right or left
    * @param wantedAngle The angle that the robot is wanted to track
    */
-  public void gyroDriveY(ADIS16448_IMU gyro, boolean right, double wantedAngle) {
-    double angle = /*(wantedAngle + gyro.getAngleZ()) * Kp*/ 0.0;
+  public void gyroDriveY(ADXRS450_Gyro gyro, boolean right, double wantedAngle) {
+    double angle = (wantedAngle - gyro.getAngle()) * Kp;
     if (right)
       drive(0, 0.4, angle, false);
     else
@@ -93,8 +94,8 @@ public class DriveTrain extends Subsystem {
    * @param gyro        Gyroscope to use
    * @param wantedAngle The angle that the robot is wanted to turn
    */
-  public void gyroTurn(ADIS16448_IMU gyro, double wantedAngle) {
-    double angle = gyro.getAngleZ();
+  public void gyroTurn(ADXRS450_Gyro gyro, double wantedAngle) {
+    double angle = gyro.getAngle();
     double power = (wantedAngle - angle) * Kp * 8;
     if (power > 0.2)
       power = 0.2;

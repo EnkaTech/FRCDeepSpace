@@ -59,7 +59,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    SmartDashboard.putNumber("Gyro", RobotMap.gyro.getAngleZ());
+    SmartDashboard.putNumber("Gyro", RobotMap.gyro.getAngle());
   }
 
   @Override
@@ -75,12 +75,13 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     RobotMap.gyro.reset();
     timer.start();
+    new AutonomousCommand(autoChooser.getSelected()).start();
   }
 
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
-    new AutonomousCommand(autoChooser.getSelected()).start();
+    
 
   }
 
