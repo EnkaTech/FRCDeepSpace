@@ -15,6 +15,7 @@ import frc.robot.RobotMap;
  * Follows a straight line in the Y axis for a given time period
  */
 public class GyroDriveY extends TimedCommand {
+  private boolean a;
   private boolean right;
   private double angle;
 
@@ -31,6 +32,13 @@ public class GyroDriveY extends TimedCommand {
     this.right = right;
     this.angle = angle;
   }
+  public GyroDriveY(double timeout, boolean right) {
+    super(timeout);
+    requires(Robot.driveTrain);
+    this.right = right;
+    this.angle = RobotMap.wantedAngle;
+    a = true;
+  }
 
   @Override
   protected void initialize() {
@@ -38,7 +46,11 @@ public class GyroDriveY extends TimedCommand {
 
   @Override
   protected void execute() {
-    Robot.driveTrain.gyroDriveY(RobotMap.gyro, RobotMap.error, angle);
+    if(a) {
+      angle = RobotMap.wantedAngle;
+      right = RobotMap.error;
+    }
+    Robot.driveTrain.gyroDriveY(RobotMap.gyro, right, angle);
   }
 
   @Override

@@ -7,6 +7,8 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.RobotMap;
 
@@ -25,7 +27,7 @@ public class ToggleLights extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    RobotMap.LEDArray.set(RobotMap.lightsOn);
+    RobotMap.LEDArray.set(RobotMap.lightsOn ? Relay.Value.kForward : Relay.Value.kOff);
   }
 
   // Make this return true when this Command no longer needs to run execute()

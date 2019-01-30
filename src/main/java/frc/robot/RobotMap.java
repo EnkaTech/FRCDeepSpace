@@ -7,7 +7,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Spark;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
@@ -23,8 +25,8 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
  */
 public class RobotMap {
 
-  public static ADIS16448_IMU gyro = new ADIS16448_IMU();
-
+  //public static ADIS16448_IMU gyro = new ADIS16448_IMU();
+  public static ADXRS450_Gyro gyro= new ADXRS450_Gyro();
   /**
    * Channel 0 - Front Left
    * Channel 1 - Rear Left
@@ -37,12 +39,13 @@ public class RobotMap {
   public static SpeedController dtRearLeft = new Spark(1);
   public static SpeedController dtRearRight = new Spark(8);
 
-  public static DigitalOutput LEDArray = new DigitalOutput(9);
+  public static Relay LEDArray = new Relay(0, Relay.Direction.kForward);
   public static boolean lightsOn = false;
   public static boolean error;
+  public static double wantedAngle;
 
   public static MecanumDrive driveTrain;
-  public static double fastSpd = 0.3;
+  public static double fastSpd = 0.5;
   public static double slowSpd = 0.2;
   public static boolean isFieldOriented = false;
 

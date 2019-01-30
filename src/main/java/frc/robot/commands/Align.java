@@ -19,10 +19,10 @@ public class Align extends CommandGroup {
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
-    addSequential(new GyroTurn(-90));
-    //addSequential(new AlignRotate());
-    //addSequential(new GyroDriveY(0.3, RobotMap.error, 0));
-    addSequential(new AlignH());
+    //addSequential(new GyroTurn(-90));
+    addSequential(new AlignRotate());
+    //addSequential(new GyroDriveY(2, !RobotMap.error));
+    //addSequential(new AlignH());
     // To run multiple commands at the same time,
     // use addParallel()
     // e.g. addParallel(new Command1());
