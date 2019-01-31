@@ -70,6 +70,19 @@ public class DriveTrain extends Subsystem {
     Timer.delay(0.0004);
   }
 
+ /**
+   * Drives the robot in a straight line
+   * 
+   * @param gyro        Gyroscope to use
+   * @param power       Forward speed
+   * @param wantedAngle The angle that the robot is wanted to track
+   */
+  public void gyroDriveX(ADXRS450_Gyro gyro, double power, double wantedAngle) {
+    double angle = (wantedAngle - gyro.getAngle()) * Kp;
+    drive(power, 0, angle, false);
+    Timer.delay(0.0004);
+  }  
+
   /**
    * Drives the robot sideways in a straight line
    * 
