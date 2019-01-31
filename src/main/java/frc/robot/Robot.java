@@ -12,7 +12,6 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -29,12 +28,10 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
  */
 public class Robot extends TimedRobot {
   public static NetworkTable table;
-  public static NetworkTable gyro;
   public static DriveTrain driveTrain = new DriveTrain();
   public static CameraServer cameraServer;
   public static UsbCamera camera;
   public static OI IO;
-  Timer timer;
   SendableChooser<Integer> autoChooser;
 
   @Override
@@ -57,7 +54,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    SmartDashboard.putNumber("distance", RobotMap.getDistance());
+    SmartDashboard.putNumber("Distance", RobotMap.getDistance());
     SmartDashboard.putNumber("Wanted angle", RobotMap.wantedAngle);
   }
 
@@ -79,7 +76,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
-    
 
   }
 

@@ -15,6 +15,7 @@ public class AlignH extends Command {
   float error;
   double power;
   double currentAngle;
+
   public AlignH() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -24,23 +25,23 @@ public class AlignH extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-   currentAngle = RobotMap.gyro.getAngle();
+    currentAngle = RobotMap.gyro.getAngle();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    error =  Robot.table.getEntry("Horizontal error").getNumber(0).floatValue();
-    power = -(error*Robot.driveTrain.Kp)/5;
-    if(power <= 0.05 && power > 0)
+    error = Robot.table.getEntry("Horizontal error").getNumber(0).floatValue();
+    power = -(error * Robot.driveTrain.Kp) / 5;
+    if (power <= 0.05 && power > 0)
       power = 0.05;
-    else if(power >= 0.3)
+    else if (power >= 0.3)
       power = 0.3;
-    else if(power <= -0.3)
+    else if (power <= -0.3)
       power = -0.3;
-    else if(power >= -0.05 && power < 0)
+    else if (power >= -0.05 && power < 0)
       power = -0.05;
-    Robot.driveTrain.drive(0, power, (currentAngle - RobotMap.gyro.getAngle())*Robot.driveTrain.Kp, false);
+    Robot.driveTrain.drive(0, power, (currentAngle - RobotMap.gyro.getAngle()) * Robot.driveTrain.Kp, false);
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Spark;
 
-
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
@@ -23,21 +22,33 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
  * floating around.
  */
 public class RobotMap {
-
+  /**
+   * Changes the input value to match the desired range. This is especially useful
+   * when getting distance values from encoders and rangefinders.
+   * 
+   * @param x       Input value
+   * @param in_min  Minimum known value of the input
+   * @param in_max  Maximum known value of the input
+   * @param out_min Desired output value for in_min
+   * @param out_max Desired output value for in_max
+   */
   public static double map(double x, double in_min, double in_max, double out_min, double out_max) {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-}
+  }
+
   private static AnalogInput rangeInput = new AnalogInput(0);
-  public static double getDistance(){
+
+  public static double getDistance() {
     double dist = rangeInput.getVoltage();
-    dist = RobotMap.map(dist, 0.28, 4.67, 0.2, 5.5)*100;
+    dist = RobotMap.map(dist, 0.28, 4.67, 0.2, 5.5) * 100;
     return dist;
   }
-  public static ADXRS450_Gyro gyro= new ADXRS450_Gyro();
+
+  public static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
   /**
-   * Channel 0 - Front Left
-   * Channel 1 - Rear Left
-   * Channel 8 - Front Right
+   * Channel 0 - Front Left 
+   * Channel 1 - Rear Left 
+   * Channel 8 - Front Right 
    * Channel 9 - Rear Right
    */
 
@@ -48,12 +59,10 @@ public class RobotMap {
 
   public static Relay LEDArray = new Relay(0, Relay.Direction.kForward);
   public static boolean lightsOn = false;
-  public static boolean error;
   public static double wantedAngle;
 
   public static MecanumDrive driveTrain;
   public static double fastSpd = 0.5;
   public static double slowSpd = 0.2;
-  public static boolean isFieldOriented = false;
 
 }

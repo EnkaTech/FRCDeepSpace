@@ -32,6 +32,7 @@ public class GyroDriveY extends TimedCommand {
     this.right = right;
     this.angle = angle;
   }
+
   public GyroDriveY(double timeout, boolean right) {
     super(timeout);
     requires(Robot.driveTrain);
@@ -46,7 +47,7 @@ public class GyroDriveY extends TimedCommand {
 
   @Override
   protected void execute() {
-    if(a) {
+    if (a) {
       angle = RobotMap.wantedAngle;
       right = RobotMap.error;
     }

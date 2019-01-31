@@ -18,6 +18,7 @@ public class Approach extends Command {
   double error;
   double power;
   final double kP = 0.02;
+
   public Approach(double wantedDistance) {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.driveTrain);
@@ -34,8 +35,8 @@ public class Approach extends Command {
   @Override
   protected void execute() {
     currentDist = RobotMap.getDistance();
-    error = currentDist-wantedDist;
-    power = error*kP;
+    error = currentDist - wantedDist;
+    power = error * kP;
     Robot.driveTrain.gyroDriveX(RobotMap.gyro, power, startingAngle);
   }
 

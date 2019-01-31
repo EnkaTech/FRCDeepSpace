@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
@@ -70,7 +69,7 @@ public class DriveTrain extends Subsystem {
     Timer.delay(0.0004);
   }
 
- /**
+  /**
    * Drives the robot in a straight line
    * 
    * @param gyro        Gyroscope to use
@@ -81,7 +80,7 @@ public class DriveTrain extends Subsystem {
     double angle = (wantedAngle - gyro.getAngle()) * Kp;
     drive(power, 0, angle, false);
     Timer.delay(0.0004);
-  }  
+  }
 
   /**
    * Drives the robot sideways in a straight line
