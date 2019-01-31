@@ -53,14 +53,11 @@ public class Robot extends TimedRobot {
     camera = cameraServer.startAutomaticCapture();
     camera.setResolution(640, 480);
     table = NetworkTableInstance.getDefault().getTable("imgproc");
-    gyro = NetworkTableInstance.getDefault().getTable("gyro");
   }
 
   @Override
   public void robotPeriodic() {
-    double dist = RobotMap.rangeInput.getVoltage();
-    dist = RobotMap.map(dist, 0.28, 4.67, 0.2, 5.5)*100;
-    SmartDashboard.putNumber("distance", dist);
+    SmartDashboard.putNumber("distance", RobotMap.getDistance());
     SmartDashboard.putNumber("Wanted angle", RobotMap.wantedAngle);
   }
 

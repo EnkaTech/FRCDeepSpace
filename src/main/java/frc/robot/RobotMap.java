@@ -27,7 +27,12 @@ public class RobotMap {
   public static double map(double x, double in_min, double in_max, double out_min, double out_max) {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
-  public static AnalogInput rangeInput = new AnalogInput(0);
+  private static AnalogInput rangeInput = new AnalogInput(0);
+  public static double getDistance(){
+    double dist = rangeInput.getVoltage();
+    dist = RobotMap.map(dist, 0.28, 4.67, 0.2, 5.5)*100;
+    return dist;
+  }
   public static ADXRS450_Gyro gyro= new ADXRS450_Gyro();
   /**
    * Channel 0 - Front Left
