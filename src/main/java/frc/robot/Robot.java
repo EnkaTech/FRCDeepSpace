@@ -44,7 +44,6 @@ public class Robot extends TimedRobot {
     RobotMap.driveTrain = new MecanumDrive(RobotMap.dtFrontLeft, RobotMap.dtRearLeft, RobotMap.dtFrontRight,
         RobotMap.dtRearRight);
     IO = new OI();
-    timer = new Timer();
     autoChooser = new SendableChooser<Integer>();
     autoChooser.setDefaultOption("Method 1", 1);
     autoChooser.addOption("Method 2", 2);
@@ -59,7 +58,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    SmartDashboard.putNumber("Gyro", RobotMap.gyro.getAngle());
+    double dist = RobotMap.rangeInput.getVoltage();
+    dist = RobotMap.map(dist, 0.28, 4.67, 0.2, 5.5)*100;
+    SmartDashboard.putNumber("distance", dist);
     SmartDashboard.putNumber("Wanted angle", RobotMap.wantedAngle);
   }
 
@@ -75,7 +76,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     RobotMap.gyro.reset();
-    timer.start();
     new AutonomousCommand(autoChooser.getSelected()).start();
   }
 

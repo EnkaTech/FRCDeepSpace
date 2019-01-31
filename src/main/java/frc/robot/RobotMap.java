@@ -8,11 +8,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Spark;
 
-import com.analog.adis16448.frc.ADIS16448_IMU;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
@@ -25,7 +24,10 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
  */
 public class RobotMap {
 
-  //public static ADIS16448_IMU gyro = new ADIS16448_IMU();
+  public static double map(double x, double in_min, double in_max, double out_min, double out_max) {
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+  public static AnalogInput rangeInput = new AnalogInput(0);
   public static ADXRS450_Gyro gyro= new ADXRS450_Gyro();
   /**
    * Channel 0 - Front Left
