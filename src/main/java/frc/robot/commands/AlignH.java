@@ -14,6 +14,7 @@ import frc.robot.RobotMap;
 public class AlignH extends Command {
   float error;
   double power;
+  double currentAngle;
   public AlignH() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -23,29 +24,29 @@ public class AlignH extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-   
+   currentAngle = RobotMap.gyro.getAngle();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     error =  Robot.table.getEntry("Horizontal error").getNumber(0).floatValue();
-    power = -(error*Robot.driveTrain.Kp)/2;
+    power = -(error*Robot.driveTrain.Kp)/5;
     if(power <= 0.05 && power > 0)
       power = 0.05;
-    else if(power >= 0.4)
-      power = 0.4;
-    else if(power <= -0.4)
-      power = -0.4;
+    else if(power >= 0.3)
+      power = 0.3;
+    else if(power <= -0.3)
+      power = -0.3;
     else if(power >= -0.05 && power < 0)
       power = -0.05;
-    Robot.driveTrain.drive(0, power, 0, false);
+    Robot.driveTrain.drive(0, power, (currentAngle - RobotMap.gyro.getAngle())*Robot.driveTrain.Kp, false);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Math.abs(error) <= 20;
+    return Math.abs(error) <= 10;
   }
 
   // Called once after isFinished returns true
