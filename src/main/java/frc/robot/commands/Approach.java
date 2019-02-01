@@ -17,7 +17,7 @@ public class Approach extends Command {
   double startingAngle;
   double error;
   double power;
-  final double kP = 0.02;
+  final double kP = -0.01;
 
   public Approach(double wantedDistance) {
     // Use requires() here to declare subsystem dependencies
@@ -28,7 +28,7 @@ public class Approach extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    startingAngle = RobotMap.gyro.getAngle();
+    startingAngle = RobotMap.gyro.getAngleZ();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -37,6 +37,15 @@ public class Approach extends Command {
     currentDist = RobotMap.getDistance();
     error = currentDist - wantedDist;
     power = error * kP;
+
+    if (power <= 0.05 && power > 0)
+      power = 0.05;
+    else if (power >= 0.3)
+      power = 0.3;
+    else if (power <= -0.3)
+      power = -0.3;
+    else if (power >= -0.05 && power < 0)
+      power = -0.05;
     Robot.driveTrain.gyroDriveX(RobotMap.gyro, power, startingAngle);
   }
 

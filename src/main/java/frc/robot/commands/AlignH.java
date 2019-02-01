@@ -25,7 +25,7 @@ public class AlignH extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    currentAngle = RobotMap.gyro.getAngle();
+    currentAngle = RobotMap.gyro.getAngleZ();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -41,7 +41,7 @@ public class AlignH extends Command {
       power = -0.3;
     else if (power >= -0.05 && power < 0)
       power = -0.05;
-    Robot.driveTrain.drive(0, power, (currentAngle - RobotMap.gyro.getAngle()) * Robot.driveTrain.Kp, false);
+    Robot.driveTrain.drive(0, power, (currentAngle - RobotMap.gyro.getAngleZ()) * Robot.driveTrain.Kp, false);
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -26,7 +26,7 @@ public class AlignRotate extends Command {
   @Override
   protected void initialize() {
     error = Robot.table.getEntry("Rotate error").getDouble(0);
-    currentAngle = RobotMap.gyro.getAngle();
+    currentAngle = RobotMap.gyro.getAngleZ();
     if (currentAngle > 0 && currentAngle < 45) {
       if (error > 0)
         wantedAngle = 0;
@@ -96,7 +96,7 @@ public class AlignRotate extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Math.abs(wantedAngle - RobotMap.gyro.getAngle()) <= 1; 
+    return Math.abs(wantedAngle - RobotMap.gyro.getAngleZ()) <= 1; 
 
   }
 

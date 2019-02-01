@@ -35,7 +35,7 @@ public class GyroTurn extends Command {
 
   @Override
   protected boolean isFinished() {
-    return Math.abs(angle - RobotMap.gyro.getAngle()) <= 1;
+    return Math.abs(angle - RobotMap.gyro.getAngleZ()) <= 1;
   }
 
   @Override

@@ -16,6 +16,6 @@ public class Align extends CommandGroup {
   public Align() {
     addSequential(new AlignRotate());
     addSequential(new AlignH());
-    addSequential(new Approach(35));
+    addSequential(new Approach(30));
   }
 }
