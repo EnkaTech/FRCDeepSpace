@@ -9,11 +9,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.Spark;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import com.analog.adis16448.frc.ADIS16448_IMU;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -51,17 +52,17 @@ public class RobotMap {
    * Channel 9 - Rear Right
    */
 
-  public static SpeedController dtFrontLeft = new Spark(0);
-  public static SpeedController dtFrontRight = new Spark(9);
-  public static SpeedController dtRearLeft = new Spark(1);
-  public static SpeedController dtRearRight = new Spark(8);
+  public static SpeedController dtFrontLeft = new WPI_VictorSPX(4);
+  public static SpeedController dtFrontRight = new WPI_VictorSPX(3);
+  public static SpeedController dtRearLeft = new WPI_TalonSRX(1);
+  public static SpeedController dtRearRight = new WPI_TalonSRX(2);
 
   public static Relay LEDArray = new Relay(0, Relay.Direction.kForward);
   public static boolean lightsOn = false;
   public static double wantedAngle;
 
   public static MecanumDrive driveTrain;
-  public static double fastSpd = 0.5;
+  public static double fastSpd = 0.3;
   public static double slowSpd = 0.2;
 
 }

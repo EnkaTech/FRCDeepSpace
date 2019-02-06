@@ -37,9 +37,9 @@ public class DriveTrain extends Subsystem {
    */
   public void drive(double xSpeed, double ySpeed, double zSpeed, boolean fieldOriented) {
     if (fieldOriented)
-      RobotMap.driveTrain.driveCartesian(ySpeed, xSpeed, zSpeed, RobotMap.gyro.getAngleZ());
+      RobotMap.driveTrain.driveCartesian(ySpeed, -xSpeed, zSpeed, RobotMap.gyro.getAngleZ());
     else
-      RobotMap.driveTrain.driveCartesian(ySpeed, xSpeed, zSpeed);
+      RobotMap.driveTrain.driveCartesian(ySpeed, -xSpeed, zSpeed);
   }
 
   /**
