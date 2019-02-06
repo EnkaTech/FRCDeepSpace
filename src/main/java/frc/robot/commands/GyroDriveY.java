@@ -32,13 +32,14 @@ public class GyroDriveY extends TimedCommand {
     this.angle = angle;
   }
 
+
   @Override
   protected void initialize() {
   }
 
   @Override
   protected void execute() {
-    Robot.driveTrain.gyroDriveY(RobotMap.gyro, RobotMap.error, angle);
+    Robot.driveTrain.gyroDriveY(RobotMap.gyro, right, angle);
   }
 
   @Override
