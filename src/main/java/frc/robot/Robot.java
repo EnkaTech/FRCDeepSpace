@@ -17,6 +17,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.GripperWheels;
+import frc.robot.subsystems.HatchHolder;
+import frc.robot.subsystems.JointMotor;
+import frc.robot.subsystems.ModeSwitcher;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 /**
@@ -28,7 +33,12 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
  */
 public class Robot extends TimedRobot {
   public static NetworkTable table;
+  public static HatchHolder holder = new HatchHolder();
+  public static Elevator elevator = new Elevator();
+  public static JointMotor joint = new JointMotor();
+  public static ModeSwitcher switcher = new ModeSwitcher();
   public static DriveTrain driveTrain = new DriveTrain();
+  public static GripperWheels gripperWheels = new GripperWheels();
   public static CameraServer cameraServer;
   public static UsbCamera camera;
   public static OI IO;
@@ -50,6 +60,8 @@ public class Robot extends TimedRobot {
     camera = cameraServer.startAutomaticCapture();
     camera.setResolution(640, 480);
     table = NetworkTableInstance.getDefault().getTable("imgproc");
+    RobotMap.elevatorEncoder.setDistancePerPulse(RobotMap.elevatorDPP);
+    RobotMap.angleEncoder.setDistancePerPulse(RobotMap.angleDPP);
   }
 
   @Override

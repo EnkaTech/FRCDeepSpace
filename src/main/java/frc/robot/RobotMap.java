@@ -8,19 +8,26 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Relay;
-
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
+
 public class RobotMap {
   /**
    * Changes the input value to match the desired range. This is especially useful
@@ -35,8 +42,19 @@ public class RobotMap {
   public static double map(double x, double in_min, double in_max, double out_min, double out_max) {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   }
-
+  //TODO: Bütün sayisal değerler elden geçirilecek
+  // Sensorler
   private static AnalogInput rangeInput = new AnalogInput(0);
+  // Elevator encoder (AMT-103V)
+  public static Encoder elevatorEncoder = new Encoder(0, 1, false, EncodingType.k4X);
+  // 1 tur = 6.5cm
+  private static double elevatorPPR = 2048;
+  public static double elevatorDPP = (1 / elevatorPPR) * 6.5;
+  // Angle encoder (Hall effect)
+  public static Encoder angleEncoder = new Encoder(2, 3, true, EncodingType.k4X);
+  //TODO: 1 tur = ?? derece
+  private static double anglePPR = 7;
+  public static double angleDPP = (1 / anglePPR) * 10;
 
   public static double getDistance() {
     double dist = rangeInput.getVoltage();
@@ -45,17 +63,27 @@ public class RobotMap {
   }
 
   public static ADIS16448_IMU gyro = new ADIS16448_IMU();
-  /**
-   * Channel 0 - Front Left 
-   * Channel 1 - Rear Left 
-   * Channel 8 - Front Right 
-   * Channel 9 - Rear Right
-   */
-
+  // DriveTrain
   public static SpeedController dtFrontLeft = new WPI_VictorSPX(4);
   public static SpeedController dtFrontRight = new WPI_VictorSPX(3);
   public static SpeedController dtRearLeft = new WPI_TalonSRX(1);
   public static SpeedController dtRearRight = new WPI_TalonSRX(2);
+
+  // Asansor
+  private static SpeedController elevatorMotor1 = new VictorSP(0);
+  private static SpeedController elevatorMotor2 = new VictorSP(1);
+  public static SpeedControllerGroup elevatorMotors = new SpeedControllerGroup(elevatorMotor1, elevatorMotor2);
+
+  // Gripper Tekerleri
+  public static SpeedController wheel1 = new VictorSP(2);
+  public static SpeedController wheel2 = new VictorSP(3);
+
+  // Açı motoru
+  public static SpeedController jointMotor = new VictorSP(4);
+
+  // Solenoidler
+  public static DoubleSolenoid modeSolenoid = new DoubleSolenoid(0, 1);
+  public static Solenoid hatchSolenoid = new Solenoid(2);
 
   public static Relay LEDArray = new Relay(0, Relay.Direction.kForward);
   public static boolean lightsOn = false;
