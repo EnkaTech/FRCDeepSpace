@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -27,50 +28,12 @@ public class AlignRotate extends Command {
   protected void initialize() {
     error = Robot.table.getEntry("Rotate error").getDouble(0);
     currentAngle = RobotMap.gyro.getAngleZ();
-    if (currentAngle > 0 && currentAngle < 45) {
-      if (error > 0)
-        wantedAngle = 0;
-      else
-        wantedAngle = 45;
-    } else if (currentAngle > 45 && currentAngle < 90) {
-      if (error > 0)
-        wantedAngle = 45;
-      else
-        wantedAngle = 90;
-    } else if (currentAngle > 90 && currentAngle < 135) {
-      if (error > 0)
-        wantedAngle = 90;
-      else
-        wantedAngle = 135;
-    } else if (currentAngle > 135 && currentAngle < 180) {
-      if (error > 0)
-        wantedAngle = 135;
-      else
-        wantedAngle = 180;
-    } else if (currentAngle > -45 && currentAngle < 0) {
-      if (error > 0)
-        wantedAngle = -45;
-      else
-        wantedAngle = 0;
-    } else if (currentAngle > -90 && currentAngle < -45) {
-      if (error > 0)
-        wantedAngle = -90;
-      else
-        wantedAngle = -45;
-    } else if (currentAngle > -135 && currentAngle < -90) {
-      if (error > 0)
-        wantedAngle = -135;
-      else
-        wantedAngle = -90;
-    } else if (currentAngle > -180 && currentAngle < -135) {
-      if (error > 0)
-        wantedAngle = -180;
-      else
-        wantedAngle = -135;
-    } else {
-      wantedAngle = 0;
-
-    }
+    if (error < 0)
+      wantedAngle = currentAngle - (currentAngle % 45);
+    else if (error > 0)
+      wantedAngle = currentAngle - (currentAngle % 45) + 45;
+    else 
+      wantedAngle = currentAngle;
     RobotMap.wantedAngle = wantedAngle;
   }
 
@@ -89,14 +52,13 @@ public class AlignRotate extends Command {
     else if (power >= -0.05 && power < 0)
       power = -0.05;
 
-
     Robot.driveTrain.gyroTurn(RobotMap.gyro, wantedAngle);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Math.abs(wantedAngle - RobotMap.gyro.getAngleZ()) <= 1; 
+    return Math.abs(wantedAngle - RobotMap.gyro.getAngleZ()) <= 1;
 
   }
 
