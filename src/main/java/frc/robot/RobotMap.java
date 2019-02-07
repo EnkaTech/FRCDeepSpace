@@ -70,7 +70,7 @@ public class RobotMap {
   public static SpeedController dtRearRight = new WPI_TalonSRX(2);
 
   // Asansor
-  private static SpeedController elevatorMotor1 = new VictorSP(0);
+  private static SpeedController elevatorMotor1 = new VictorSP(5);
   private static SpeedController elevatorMotor2 = new VictorSP(1);
   public static SpeedControllerGroup elevatorMotors = new SpeedControllerGroup(elevatorMotor1, elevatorMotor2);
 
