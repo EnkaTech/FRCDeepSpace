@@ -47,9 +47,9 @@ public class RobotMap {
   private static AnalogInput rangeInput = new AnalogInput(0);
   // Elevator encoder (AMT-103V)
   public static Encoder elevatorEncoder = new Encoder(0, 1, false, EncodingType.k4X);
-  // 1 tur = 6.5cm
+  // 1 tur = 3.224cm 
   private static double elevatorPPR = 2048;
-  public static double elevatorDPP = (1 / elevatorPPR) * 6.5;
+  public static double elevatorDPP = (1 / elevatorPPR) * 6.2;
   // Angle encoder (Hall effect)
   public static Encoder angleEncoder = new Encoder(2, 3, true, EncodingType.k4X);
   //TODO: 1 tur = ?? derece

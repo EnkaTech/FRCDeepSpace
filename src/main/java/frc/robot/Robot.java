@@ -22,6 +22,7 @@ import frc.robot.subsystems.GripperWheels;
 import frc.robot.subsystems.HatchHolder;
 import frc.robot.subsystems.JointMotor;
 import frc.robot.subsystems.ModeSwitcher;
+import frc.robot.subsystems.TempElevator;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 /**
@@ -35,6 +36,7 @@ public class Robot extends TimedRobot {
   public static NetworkTable table;
   public static HatchHolder holder = new HatchHolder();
   public static Elevator elevator = new Elevator();
+  public static TempElevator tElevator = new TempElevator();
   public static JointMotor joint = new JointMotor();
   public static ModeSwitcher switcher = new ModeSwitcher();
   public static DriveTrain driveTrain = new DriveTrain();
@@ -68,6 +70,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     SmartDashboard.putNumber("Distance", RobotMap.getDistance());
     SmartDashboard.putNumber("Wanted angle", RobotMap.wantedAngle);
+    SmartDashboard.putNumber("Elevator height", -RobotMap.elevatorEncoder.getDistance() + 20);
   }
 
   @Override

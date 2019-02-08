@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.Align;
+import frc.robot.commands.Intake;
+import frc.robot.commands.ManualElevator;
 import frc.robot.commands.ToggleLights;
 
 /**
@@ -22,9 +24,17 @@ public class OI {
   public Joystick joy1 = new Joystick(0);
   public Button j1_3 = new JoystickButton(joy1, 3);
   public Button j1_11 = new JoystickButton(joy1, 11);
+  public Button j1_9  = new JoystickButton(joy1, 9);
+  public Button j1_10 = new JoystickButton(joy1, 10);
+  public Button j1_7 = new JoystickButton(joy1, 7);
+  public Button j1_8 = new JoystickButton(joy1, 8);
 
   public OI() {
     j1_3.whenPressed(new ToggleLights());
     j1_11.whenPressed(new Align());
+    j1_9.whileHeld(new Intake(true));
+    j1_10.whileHeld(new Intake(false));
+    j1_7.whileHeld(new ManualElevator(0.1));
+    j1_8.whileHeld(new ManualElevator(-0.2));
   }
 }
