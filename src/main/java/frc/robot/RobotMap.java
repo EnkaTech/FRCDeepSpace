@@ -54,7 +54,7 @@ public class RobotMap {
   public static Encoder angleEncoder = new Encoder(2, 3, true, EncodingType.k4X);
   //TODO: 1 tur = ?? derece
   private static double anglePPR = 7;
-  public static double angleDPP = (1 / anglePPR) * 10;
+  public static double angleDPP = (1 / anglePPR) * 115.2;
 
   public static double getDistance() {
     double dist = rangeInput.getVoltage();
@@ -79,11 +79,11 @@ public class RobotMap {
   public static SpeedController wheel2 = new VictorSP(3);
 
   // Açı motoru
-  public static SpeedController jointMotor = new VictorSP(4);
+  public static SpeedController jointMotor = new WPI_VictorSPX(5);
 
   // Solenoidler
-  public static DoubleSolenoid modeSolenoid = new DoubleSolenoid(0, 1);
-  public static Solenoid hatchSolenoid = new Solenoid(2);
+  public static DoubleSolenoid modeSolenoid = new DoubleSolenoid(4, 5);
+  public static DoubleSolenoid hatchSolenoid = new DoubleSolenoid(6, 7);
 
   public static Relay LEDArray = new Relay(0, Relay.Direction.kForward);
   public static boolean lightsOn = false;

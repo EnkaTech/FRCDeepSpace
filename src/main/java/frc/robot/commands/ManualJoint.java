@@ -10,44 +10,42 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class SetElevatorHeight extends Command {
-  private double m_height;
-  public SetElevatorHeight(double height) {
+public class ManualJoint extends Command {
+  private double a;
+  public ManualJoint(double x) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.elevator);
-    m_height = height;
+    requires(Robot.tJoint);
+    a = x;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.elevator.setSetpoint(m_height);
-    Robot.elevator.getPIDController().reset();
-    Robot.elevator.disable();
-    Robot.elevator.enable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.tJoint.move(a);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.elevator.onTarget();
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.elevator.disable();
+    Robot.tJoint.move(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

@@ -7,32 +7,23 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
-public class HatchHolder extends Subsystem {
+public class TempJoint extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-
-  private DoubleSolenoid m_solenoid = RobotMap.hatchSolenoid;
+  private SpeedController m_motor = RobotMap.jointMotor;
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
-
-  public void eject(){
-    m_solenoid.set(Value.kForward);
-    Timer.delay(0.2);
-    m_solenoid.set(Value.kReverse);
-    Timer.delay(0.01);
-    m_solenoid.set(Value.kOff);
+  public void move(double x){
+    m_motor.set(x);
   }
 }

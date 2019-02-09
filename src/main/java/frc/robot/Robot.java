@@ -11,6 +11,7 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -23,6 +24,7 @@ import frc.robot.subsystems.HatchHolder;
 import frc.robot.subsystems.JointMotor;
 import frc.robot.subsystems.ModeSwitcher;
 import frc.robot.subsystems.TempElevator;
+import frc.robot.subsystems.TempJoint;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 /**
@@ -33,10 +35,12 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
  * project.
  */
 public class Robot extends TimedRobot {
+  public static Compressor compressor = new Compressor();
   public static NetworkTable table;
   public static HatchHolder holder = new HatchHolder();
   public static Elevator elevator = new Elevator();
   public static TempElevator tElevator = new TempElevator();
+  public static TempJoint tJoint = new TempJoint();
   public static JointMotor joint = new JointMotor();
   public static ModeSwitcher switcher = new ModeSwitcher();
   public static DriveTrain driveTrain = new DriveTrain();
@@ -63,6 +67,7 @@ public class Robot extends TimedRobot {
     camera.setResolution(640, 480);
     table = NetworkTableInstance.getDefault().getTable("imgproc");
     RobotMap.elevatorEncoder.setDistancePerPulse(RobotMap.elevatorDPP);
+    compressor.setClosedLoopControl(true);
     RobotMap.angleEncoder.setDistancePerPulse(RobotMap.angleDPP);
   }
 
@@ -71,6 +76,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Distance", RobotMap.getDistance());
     SmartDashboard.putNumber("Wanted angle", RobotMap.wantedAngle);
     SmartDashboard.putNumber("Elevator height", -RobotMap.elevatorEncoder.getDistance() + 20);
+    SmartDashboard.putNumber("Joint angle", RobotMap.angleEncoder.getDistance());
   }
 
   @Override
@@ -101,7 +107,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    Scheduler.getInstance().run();
+  if(IO.joy2.getRawButtonPressed(7))
+    compressor.setClosedLoopControl(true);
+  else if(IO.joy2.getRawButtonPressed(8))
+    compressor.setClosedLoopControl(false);
+  Scheduler.getInstance().run();
   }
 
   @Override
