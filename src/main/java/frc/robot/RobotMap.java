@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -42,7 +41,6 @@ public class RobotMap {
   public static double map(double x, double in_min, double in_max, double out_min, double out_max) {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   }
-  //TODO: Bütün sayisal değerler elden geçirilecek
   // Sensorler
   private static AnalogInput rangeInput = new AnalogInput(0);
   // Elevator encoder (AMT-103V)

@@ -26,7 +26,7 @@ public class Elevator extends PIDSubsystem {
     super("Elevator", -0.002, 0, 0);
     setAbsoluteTolerance(0.5);
     setInputRange(-175, 175);
-    setOutputRange(-0.9, 0.9);
+    setOutputRange(-0.4, 0.4);
     // Use these to get going:
     // setSetpoint() - Sets where the PID controller should move the system
     // to
