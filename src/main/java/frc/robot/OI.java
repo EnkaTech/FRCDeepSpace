@@ -42,6 +42,7 @@ public class OI {
   public Button j2_2 = new JoystickButton(joy2, 2);
   public Button j2_3 = new JoystickButton(joy2, 3);
   public Button j2_4 = new JoystickButton(joy2, 4);
+  public Button j2_5 = new JoystickButton(joy2, 5);
 
   public OI() {
     j1_3.whenPressed(new ChangeMode(true));
@@ -58,5 +59,6 @@ public class OI {
     j2_2.whenPressed(new SetElevatorHeight(90));
     j2_3.whenPressed(new DisableElevator());
     j2_4.whenPressed(new SetElevatorHeight(60));
+    j2_5.whenPressed(new ToggleLights());
   }
 }
