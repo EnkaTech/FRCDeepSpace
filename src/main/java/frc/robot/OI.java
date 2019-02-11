@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.Align;
 import frc.robot.commands.ChangeMode;
+import frc.robot.commands.DisableElevator;
 import frc.robot.commands.Eject;
 import frc.robot.commands.Intake;
 import frc.robot.commands.ManualElevator;
@@ -53,9 +54,9 @@ public class OI {
     j1_8.whileHeld(new ManualElevator(-0.2));
     j1_6.whileHeld(new ManualJoint(0.4));
     j1_5.whileHeld(new ManualJoint(-0.4));
-    j2_1.whenPressed(new SetElevatorHeight(50));
-    j2_2.whenPressed(new SetElevatorHeight(100));
-    j2_3.whenPressed(new ToggleLights());
-    j2_4.whenPressed(new SetElevatorHeight(180));
+    j2_1.whenPressed(new SetElevatorHeight(30));
+    j2_2.whenPressed(new SetElevatorHeight(90));
+    j2_3.whenPressed(new DisableElevator());
+    j2_4.whenPressed(new SetElevatorHeight(60));
   }
 }
