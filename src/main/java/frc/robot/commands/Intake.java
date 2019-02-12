@@ -27,9 +27,9 @@ public class Intake extends Command {
   @Override
   protected void execute() {
     if(out)
-      Robot.gripperWheels.intake(0.4);
+      Robot.gripperWheels.intake(0.6);
     else
-      Robot.gripperWheels.intake(-0.4);
+      Robot.gripperWheels.intake(-0.6);
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -42,7 +42,9 @@ public class OI {
   public Button j2_2 = new JoystickButton(joy2, 2);
   public Button j2_3 = new JoystickButton(joy2, 3);
   public Button j2_4 = new JoystickButton(joy2, 4);
-  public Button j2_5 = new JoystickButton(joy2, 5);
+  public Button j2_9 = new JoystickButton(joy2, 9);
+  public Button j2_10 = new JoystickButton(joy2, 10);
+
 
   public OI() {
     j1_3.whenPressed(new ChangeMode(true));
@@ -55,10 +57,11 @@ public class OI {
     j1_8.whileHeld(new ManualElevator(-0.2));
     j1_6.whileHeld(new ManualJoint(0.4));
     j1_5.whileHeld(new ManualJoint(-0.4));
-    j2_1.whenPressed(new SetElevatorHeight(30));
-    j2_2.whenPressed(new SetElevatorHeight(90));
+    j2_1.whenPressed(new SetElevatorHeight(77));
+    j2_2.whenPressed(new SetElevatorHeight(142));
     j2_3.whenPressed(new DisableElevator());
-    j2_4.whenPressed(new SetElevatorHeight(60));
-    j2_5.whenPressed(new ToggleLights());
+    j2_4.whenPressed(new SetElevatorHeight(180));
+    j2_10.whenPressed(new ToggleLights());
+    j2_9.whenPressed(new Align());
   }
 }

@@ -37,7 +37,7 @@ public class DriveTrain extends Subsystem {
    */
   public void drive(double xSpeed, double ySpeed, double zSpeed, boolean fieldOriented) {
     if (fieldOriented)
-      RobotMap.driveTrain.driveCartesian(ySpeed, -xSpeed, zSpeed, RobotMap.gyro.getAngleZ());
+      RobotMap.driveTrain.driveCartesian(ySpeed, -xSpeed, zSpeed, RobotMap.gyro.getAngleX());
     else
       RobotMap.driveTrain.driveCartesian(ySpeed, -xSpeed, zSpeed);
   }
@@ -61,7 +61,7 @@ public class DriveTrain extends Subsystem {
    * @param wantedAngle The angle that the robot is wanted to track
    */
   public void gyroDriveX(ADIS16448_IMU gyro, boolean front, double wantedAngle) {
-    double angle = (wantedAngle - gyro.getAngleZ()) * Kp;
+    double angle = (wantedAngle - gyro.getAngleX()) * Kp;
     if (front)
       drive(-0.4, 0, angle, false);
     else
@@ -78,7 +78,7 @@ public class DriveTrain extends Subsystem {
    * @param wantedAngle The angle that the robot is wanted to track
    */
   public void gyroDriveX(ADIS16448_IMU gyro, double power, double wantedAngle) {
-    double angle = (wantedAngle - gyro.getAngleZ()) * Kp;
+    double angle = (wantedAngle - gyro.getAngleX()) * Kp;
     drive(power, 0, angle, false);
     Timer.delay(0.0004);
   }
@@ -91,7 +91,7 @@ public class DriveTrain extends Subsystem {
    * @param wantedAngle The angle that the robot is wanted to track
    */
   public void gyroDriveY(ADIS16448_IMU gyro, boolean right, double wantedAngle) {
-    double angle = (wantedAngle - gyro.getAngleZ()) * Kp;
+    double angle = (wantedAngle - gyro.getAngleX()) * Kp;
     if (right)
       drive(0, 0.4, angle, false);
     else
@@ -107,7 +107,7 @@ public class DriveTrain extends Subsystem {
    * @param wantedAngle The angle that the robot is wanted to turn
    */
   public void gyroTurn(ADIS16448_IMU gyro, double wantedAngle) {
-    double angle = gyro.getAngleZ();
+    double angle = gyro.getAngleX();
     double power = (wantedAngle - angle) * Kp * 8;
     if (power > 0.2)
       power = 0.2;

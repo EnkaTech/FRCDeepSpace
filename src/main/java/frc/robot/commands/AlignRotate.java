@@ -17,6 +17,7 @@ public class AlignRotate extends Command {
   double power;
   double currentAngle;
   double wantedAngle;
+  double rem;
 
   public AlignRotate() {
     // Use requires() here to declare subsystem dependencies
@@ -27,11 +28,18 @@ public class AlignRotate extends Command {
   @Override
   protected void initialize() {
     error = Robot.table.getEntry("Rotate error").getDouble(0);
-    currentAngle = RobotMap.gyro.getAngleZ();
-    if (error < 0)
-      wantedAngle = currentAngle - (currentAngle % 45);
-    else if (error > 0)
-      wantedAngle = currentAngle - (currentAngle % 45) + 45;
+    currentAngle = RobotMap.gyro.getAngleX();
+    rem = currentAngle % 90;
+    if (error < 0){ //ccw
+      if(rem < 30)
+        wantedAngle = currentAngle - rem;
+      else
+        wantedAngle = currentAngle - rem + 30;}
+    else if (error > 0){//cw
+      if(rem > 60)
+        wantedAngle = currentAngle - rem + 90;
+      else
+        wantedAngle = currentAngle - rem + 30;}
     else 
       wantedAngle = currentAngle;
     RobotMap.wantedAngle = wantedAngle;
@@ -58,7 +66,7 @@ public class AlignRotate extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Math.abs(wantedAngle - RobotMap.gyro.getAngleZ()) <= 1;
+    return Math.abs(wantedAngle - RobotMap.gyro.getAngleX()) <= 1;
 
   }
 

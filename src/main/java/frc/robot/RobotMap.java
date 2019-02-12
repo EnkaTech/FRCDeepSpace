@@ -52,7 +52,7 @@ public class RobotMap {
   public static Encoder angleEncoder = new Encoder(2, 3, true, EncodingType.k4X);
   //TODO: 1 tur = ?? derece
   private static double anglePPR = 7;
-  public static double angleDPP = (1 / anglePPR) * 115.2;
+  public static double angleDPP = (1 / anglePPR) * 0.74;
 
   public static double getDistance() {
     double dist = rangeInput.getVoltage();
@@ -88,7 +88,7 @@ public class RobotMap {
   public static double wantedAngle;
 
   public static MecanumDrive driveTrain;
-  public static double fastSpd = 0.3;
+  public static double fastSpd = 0.5;
   public static double slowSpd = 0.2;
 
 }
