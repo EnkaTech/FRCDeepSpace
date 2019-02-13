@@ -14,7 +14,7 @@ public class AutoCargo extends CommandGroup {
    * Add your docs here.
    */
   public AutoCargo(int level) {
-    addSequential(new Align());
+    // addSequential(new Align());
     addSequential(new ChangeMode(false));
     switch(level) {
       case 1:
