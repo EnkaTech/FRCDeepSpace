@@ -57,11 +57,11 @@ public class OI {
     j1_8.whileHeld(new ManualElevator(-0.2));
     j1_6.whileHeld(new ManualJoint(0.4));
     j1_5.whileHeld(new ManualJoint(-0.4));
-    j2_1.whenPressed(new SetElevatorHeight(77));
+    j2_1.whenPressed(new SetElevatorHeight(34));
     j2_2.whenPressed(new SetElevatorHeight(142));
     j2_3.whenPressed(new DisableElevator());
     j2_4.whenPressed(new SetElevatorHeight(180));
     j2_10.whenPressed(new ToggleLights());
-    j2_9.whenPressed(new Align());
+    //j2_9.whenPressed(new Align());
   }
 }

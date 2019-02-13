@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -29,18 +30,17 @@ public class AlignRotate extends Command {
   protected void initialize() {
     error = Robot.table.getEntry("Rotate error").getDouble(0);
     currentAngle = RobotMap.gyro.getAngleX();
-    rem = currentAngle % 90;
-    if (error < 0){ //ccw
-      if(rem < 30)
-        wantedAngle = currentAngle - rem;
-      else
-        wantedAngle = currentAngle - rem + 30;}
-    else if (error > 0){//cw
-      if(rem > 60)
-        wantedAngle = currentAngle - rem + 90;
-      else
-        wantedAngle = currentAngle - rem + 30;}
-    else 
+    rem = currentAngle % 180;
+    wantedAngle = currentAngle - rem;
+    if((error > 0 && rem < 30) || (error < 0 && rem < 90))
+      wantedAngle += 30;
+    else if((error > 0 && rem < 90) || (error < 0 && rem < 150))
+      wantedAngle += 90;
+    else if((error > 0 && rem < 150) || (error > 0))
+      wantedAngle += 150;
+    else if (error > 0)
+      wantedAngle += 180;
+    else
       wantedAngle = currentAngle;
     RobotMap.wantedAngle = wantedAngle;
   }

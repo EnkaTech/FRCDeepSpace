@@ -18,14 +18,14 @@ public class AutoCargo extends CommandGroup {
     addSequential(new ChangeMode(false));
     switch(level) {
       case 1:
-        addSequential(new SetElevatorHeight(60));
+        addSequential(new SetElevatorHeight(77));
         break;
     
       case 2:
-        addSequential(new SetElevatorHeight(131));
+        addSequential(new SetElevatorHeight(142));
         break;
       case 3:
-        addSequential(new SetElevatorHeight(170));
+        addSequential(new SetElevatorHeight(180));
         //TODO: Aci
       default:
         break;

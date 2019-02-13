@@ -39,7 +39,7 @@ public class ManualElevator extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.tElevator.move(0.0);
+    Robot.tElevator.move(-0.05);
   }
 
   // Called when another command which requires one or more of the same
