@@ -32,9 +32,9 @@ public class AutoCargo extends CommandGroup {
     }
     addSequential(new Intake(true), 1.0);
     addSequential(new SetJointAngle(0));
-    // addSequential(new ChangeMode(true));
     addSequential(new SetElevatorHeight(26));
     addSequential(new DisableElevator());
     addSequential(new DisableJoint());
+    addSequential(new ChangeMode(true));
   }
 }
