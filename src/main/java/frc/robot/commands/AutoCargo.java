@@ -26,10 +26,15 @@ public class AutoCargo extends CommandGroup {
         break;
       case 3:
         addSequential(new SetElevatorHeight(180));
-        //TODO: Aci
+        addSequential(new SetJointAngle(33));
       default:
         break;
     }
     addSequential(new Intake(true), 1.0);
+    addSequential(new SetJointAngle(0));
+    // addSequential(new ChangeMode(true));
+    addSequential(new SetElevatorHeight(26));
+    addSequential(new DisableElevator());
+    addSequential(new DisableJoint());
   }
 }

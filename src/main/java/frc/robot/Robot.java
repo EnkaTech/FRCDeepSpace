@@ -75,7 +75,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     SmartDashboard.putNumber("Distance", RobotMap.getDistance());
     SmartDashboard.putNumber("Wanted angle", RobotMap.wantedAngle);
-    SmartDashboard.putNumber("Elevator height", -RobotMap.elevatorEncoder.getDistance() + 20);
+    SmartDashboard.putNumber("Elevator height", -RobotMap.elevatorEncoder.getDistance() + 26);
     SmartDashboard.putNumber("Joint angle", RobotMap.angleEncoder.getDistance());
   }
 

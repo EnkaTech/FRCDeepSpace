@@ -24,9 +24,9 @@ public class Elevator extends PIDSubsystem {
   public Elevator() {
     // Intert a subsystem name and PID values here
     super("Elevator", -0.12, -0.001, 0);
-    setAbsoluteTolerance(3);
+    setAbsoluteTolerance(1);
     setInputRange(-175, 175);
-    setOutputRange(-0.4, 0.4);
+    setOutputRange(-0.6, 0.6);
     // Use these to get going:
     // setSetpoint() - Sets where the PID controller should move the system
     // to

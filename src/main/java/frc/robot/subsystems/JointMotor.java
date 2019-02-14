@@ -23,9 +23,9 @@ public class JointMotor extends PIDSubsystem {
   private SpeedController m_motor = RobotMap.jointMotor;
   public JointMotor() {
     // Intert a subsystem name and PID values here
-    super("Angle Motor", 0.1, 0, 0);
-    setAbsoluteTolerance(3);
-    setOutputRange(-0.8, 0.8);
+    super("Angle Motor", 0.08, 0, 0);
+    setAbsoluteTolerance(2);
+    setOutputRange(-0.5, 0.5);
     // Use these to get going:
     // setSetpoint() - Sets where the PID controller should move the system
     // to

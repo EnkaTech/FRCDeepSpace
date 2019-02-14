@@ -54,14 +54,14 @@ public class OI {
     j1_11.whenPressed(new Align());
     j1_9.whileHeld(new Intake(true));
     j1_10.whileHeld(new Intake(false));
-    j1_7.whileHeld(new ManualElevator(0.1));
-    j1_8.whileHeld(new ManualElevator(-0.2));
+    j1_7.whileHeld(new ManualElevator(0.4));
+    j1_8.whileHeld(new ManualElevator(-0.4));
     j1_6.whileHeld(new ManualJoint(0.4));
     j1_5.whileHeld(new ManualJoint(-0.4));
     j2_1.whenPressed(new AutoCargo(1));
     j2_2.whenPressed(new AutoCargo(2));
     j2_3.whenPressed(new DisableElevator());
-    j2_4.whenPressed(new SetElevatorHeight(180));
+    j2_4.whenPressed(new AutoCargo(3));
     j2_10.whenPressed(new ToggleLights());
     //j2_9.whenPressed(new Align());
   }
