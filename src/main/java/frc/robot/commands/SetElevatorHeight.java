@@ -9,51 +9,40 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
-public class AlignH extends Command {
-  float error;
-  double power;
-  double currentAngle;
-
-  public AlignH() {
+public class SetElevatorHeight extends Command {
+  private double m_height;
+  public SetElevatorHeight(double height) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.driveTrain);
+    requires(Robot.elevator);
+    m_height = height - 26;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    currentAngle = RobotMap.gyro.getAngleX();
+    Robot.elevator.setSetpoint(m_height);
+    Robot.elevator.getPIDController().reset();
+    Robot.elevator.disable();
+    Robot.elevator.enable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    error = Robot.table.getEntry("Horizontal error").getNumber(0).floatValue();
-    power = -(error * Robot.driveTrain.Kp) / 5;
-    if (power <= 0.05 && power > 0)
-      power = 0.05;
-    else if (power >= 0.3)
-      power = 0.3;
-    else if (power <= -0.3)
-      power = -0.3;
-    else if (power >= -0.05 && power < 0)
-      power = -0.05;
-    Robot.driveTrain.drive(0, power, (currentAngle - RobotMap.gyro.getAngleX()) * Robot.driveTrain.Kp, false);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Math.abs(error) <= 10;
+    return Robot.elevator.onTarget();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveTrain.drive(0, 0, 0, false);
+    //Robot.elevator.disable();
   }
 
   // Called when another command which requires one or more of the same

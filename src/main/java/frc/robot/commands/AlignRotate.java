@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -17,6 +18,7 @@ public class AlignRotate extends Command {
   double power;
   double currentAngle;
   double wantedAngle;
+  double rem;
 
   public AlignRotate() {
     // Use requires() here to declare subsystem dependencies
@@ -27,12 +29,18 @@ public class AlignRotate extends Command {
   @Override
   protected void initialize() {
     error = Robot.table.getEntry("Rotate error").getDouble(0);
-    currentAngle = RobotMap.gyro.getAngleZ();
-    if (error < 0)
-      wantedAngle = currentAngle - (currentAngle % 45);
+    currentAngle = RobotMap.gyro.getAngleX();
+    rem = currentAngle % 180;
+    wantedAngle = currentAngle - rem;
+    if((error > 0 && rem < 30) || (error < 0 && rem < 90))
+      wantedAngle += 30;
+    else if((error > 0 && rem < 90) || (error < 0 && rem < 150))
+      wantedAngle += 90;
+    else if((error > 0 && rem < 150) || (error > 0))
+      wantedAngle += 150;
     else if (error > 0)
-      wantedAngle = currentAngle - (currentAngle % 45) + 45;
-    else 
+      wantedAngle += 180;
+    else
       wantedAngle = currentAngle;
     RobotMap.wantedAngle = wantedAngle;
   }
@@ -58,7 +66,7 @@ public class AlignRotate extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Math.abs(wantedAngle - RobotMap.gyro.getAngleZ()) <= 1;
+    return Math.abs(wantedAngle - RobotMap.gyro.getAngleX()) <= 1;
 
   }
 

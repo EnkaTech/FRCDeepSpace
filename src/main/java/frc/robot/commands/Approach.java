@@ -28,7 +28,7 @@ public class Approach extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    startingAngle = RobotMap.gyro.getAngleZ();
+    startingAngle = RobotMap.gyro.getAngleX();
   }
 
   // Called repeatedly when this Command is scheduled to run
