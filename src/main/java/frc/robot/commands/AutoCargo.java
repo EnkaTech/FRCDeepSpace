@@ -19,18 +19,20 @@ public class AutoCargo extends CommandGroup {
     switch(level) {
       case 1:
         addSequential(new SetElevatorHeight(77));
+        addSequential(new Intake(0.6), 1);
         break;
     
       case 2:
         addSequential(new SetElevatorHeight(142));
+        addSequential(new Intake(0.6), 1);
         break;
       case 3:
         addSequential(new SetElevatorHeight(180));
         addSequential(new SetJointAngle(33));
+        addSequential(new Intake(0.8), 1.5);
       default:
         break;
     }
-    addSequential(new Intake(true), 1.0);
     addSequential(new SetJointAngle(0));
     addSequential(new SetElevatorHeight(26));
     addSequential(new DisableElevator());

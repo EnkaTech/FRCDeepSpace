@@ -11,10 +11,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class Intake extends Command {
-  private boolean out;
-  public Intake(boolean out) {
+  private double power;
+  
+  public Intake(double p){
     requires(Robot.gripperWheels);
-    this.out = out;
+    power = p;
   }
 
 
@@ -26,10 +27,13 @@ public class Intake extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    /*
     if(out)
-      Robot.gripperWheels.intake(0.6);
+      Robot.gripperWheels.intake(0.7);
     else
-      Robot.gripperWheels.intake(-0.6);
+      Robot.gripperWheels.intake(-0.7);
+      */
+    Robot.gripperWheels.intake(power);
   }
 
   // Make this return true when this Command no longer needs to run execute()

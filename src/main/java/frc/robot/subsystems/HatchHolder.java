@@ -29,9 +29,9 @@ public class HatchHolder extends Subsystem {
 
   public void eject(){
     m_solenoid.set(Value.kForward);
-    Timer.delay(0.2);
+    Timer.delay(0.5);
     m_solenoid.set(Value.kReverse);
-    Timer.delay(0.01);
+    Timer.delay(0.1);
     m_solenoid.set(Value.kOff);
   }
 }
