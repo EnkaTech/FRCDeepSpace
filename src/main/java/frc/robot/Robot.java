@@ -73,6 +73,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
+    /*if(compressor.getPressureSwitchValue())
+      compressor.setClosedLoopControl(false);
+    else if(IO.joy2.getRawButtonPressed(8))
+      compressor.setClosedLoopControl(!compressor.getClosedLoopControl());
+      */
     SmartDashboard.putNumber("Distance", RobotMap.getDistance());
     SmartDashboard.putNumber("Wanted angle", RobotMap.wantedAngle);
     SmartDashboard.putNumber("Elevator height", -RobotMap.elevatorEncoder.getDistance() + 26);
@@ -107,10 +112,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-  if(IO.joy2.getRawButtonPressed(7))
-    compressor.setClosedLoopControl(true);
-  else if(IO.joy2.getRawButtonPressed(8))
-    compressor.setClosedLoopControl(false);
   Scheduler.getInstance().run();
   }
 

@@ -28,7 +28,7 @@ public class AutoHatch extends CommandGroup {
         addSequential(new SetElevatorHeight(105));
         break;
       case 3:
-        addSequential(new SetElevatorHeight(165));
+        addSequential(new SetElevatorHeight(175));
     }
     //Timer.delay(0.2);
     if(eject)

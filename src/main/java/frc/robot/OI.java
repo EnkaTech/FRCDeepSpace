@@ -65,5 +65,6 @@ public class OI {
     j2_5.whenPressed(new AutoHatch(1));
     j2_10.whenPressed(new ToggleLights());
     j2_9.whenPressed(new Align());
+    j2_6.whenPressed(new AutoCargo(4));
   }
 }

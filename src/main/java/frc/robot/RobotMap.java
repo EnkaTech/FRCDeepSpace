@@ -50,6 +50,7 @@ public class RobotMap {
   public static double elevatorDPP = (1 / elevatorPPR) * 6.2;
   // Angle encoder (Hall effect)
   public static Encoder angleEncoder = new Encoder(2, 3, true, EncodingType.k4X);
+  //4.468 = 1 tur cimcoder 20 ppr
   
   private static double anglePPR = 7;
   public static double angleDPP = (1 / anglePPR) * 0.74;
