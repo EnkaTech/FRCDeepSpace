@@ -16,7 +16,8 @@ public class AutonomousCommand extends CommandGroup {
    * @param choice The method to choose
    */
   public AutonomousCommand(int choice) {
-    addSequential(new DriveToDistance(80));
-    addSequential(new GyroTurn(30));
+    addSequential(new DriveToDistance(320));
+    addSequential(new GyroTurn(45));
+    addSequential(new DriveToDistance(27));
   }
 }
