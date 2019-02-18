@@ -40,6 +40,13 @@ public class DriveToDistance extends Command {
     currentDist = (RobotMap.frontRightEncoder.getDistance() + RobotMap.rearLeftEncoder.getDistance())/2;
     error = wantedDist - currentDist;
     power = error * kP;
+    if(power > 0  && power < 0.1)
+      power = 0.1;
+    else if(power < 0 && power > -0.1)
+      power = -0.1;
+    else if(power < -0.3)
+      power = -0.3;
+    else if(power > 0.3)
     Robot.driveTrain.gyroDriveX(RobotMap.gyro, power, currentAngle);
   }
 

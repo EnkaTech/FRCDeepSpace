@@ -33,14 +33,14 @@ public class AlignH extends Command {
   protected void execute() {
     error = Robot.table.getEntry("Horizontal error").getNumber(0).floatValue();
     power = -(error * Robot.driveTrain.Kp) / 5;
-    if (power <= 0.05 && power > 0)
-      power = 0.05;
+    if (power <= 0.1 && power > 0)
+      power = 0.1;
     else if (power >= 0.3)
       power = 0.3;
     else if (power <= -0.3)
       power = -0.3;
-    else if (power >= -0.05 && power < 0)
-      power = -0.05;
+    else if (power >= -0.1 && power < 0)
+      power = -0.1;
     Robot.driveTrain.drive(0, power, (currentAngle - RobotMap.gyro.getAngleX()) * Robot.driveTrain.Kp, false);
   }
 
