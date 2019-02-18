@@ -50,10 +50,26 @@ public class RobotMap {
   public static double elevatorDPP = (1 / elevatorPPR) * 6.2;
   // Angle encoder (Hall effect)
   public static Encoder angleEncoder = new Encoder(2, 3, true, EncodingType.k4X);
-  //4.468 = 1 tur cimcoder 20 ppr
-  
   private static double anglePPR = 7;
   public static double angleDPP = (1 / anglePPR) * 0.74;
+  //4.468 = 1 tur cimcoder 20 ppr
+  /*
+  front right
+  5v turuncu
+  ch a kahve
+  ch b siyah
+  toprk kirmizi
+ rear left
+  5v kırmızı
+  ch a kahve
+  ch b siyah
+  toprak turuncu
+  */
+  public static Encoder rearLeftEncoder = new Encoder(4,6,true,EncodingType.k4X);
+  public static Encoder frontRightEncoder = new Encoder(7,8,true,EncodingType.k4X);
+  private static double cimPPR = 20;
+  public static double cimDPP = (1 / cimPPR) * 4.468;
+  
 
   public static double getDistance() {
     double dist = rangeInput.getVoltage();

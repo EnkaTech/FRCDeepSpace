@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     RobotMap.dtFrontLeft.setInverted(true);
-    //RobotMap.dtRearLeft.setInverted(true);
+    // RobotMap.dtRearLeft.setInverted(true);
     RobotMap.driveTrain = new MecanumDrive(RobotMap.dtFrontLeft, RobotMap.dtRearLeft, RobotMap.dtFrontRight,
         RobotMap.dtRearRight);
     IO = new OI();
@@ -67,21 +67,28 @@ public class Robot extends TimedRobot {
     camera.setResolution(640, 480);
     table = NetworkTableInstance.getDefault().getTable("imgproc");
     RobotMap.elevatorEncoder.setDistancePerPulse(RobotMap.elevatorDPP);
+    RobotMap.rearLeftEncoder.setDistancePerPulse(RobotMap.cimDPP);
+    RobotMap.frontRightEncoder.setDistancePerPulse(RobotMap.cimDPP);
     compressor.setClosedLoopControl(true);
     RobotMap.angleEncoder.setDistancePerPulse(RobotMap.angleDPP);
   }
 
   @Override
   public void robotPeriodic() {
-    /*if(compressor.getPressureSwitchValue())
-      compressor.setClosedLoopControl(false);
-    else if(IO.joy2.getRawButtonPressed(8))
-      compressor.setClosedLoopControl(!compressor.getClosedLoopControl());
-      */
+    /*
+     * if(compressor.getPressureSwitchValue())
+     * compressor.setClosedLoopControl(false); else
+     * if(IO.joy2.getRawButtonPressed(8))
+     * compressor.setClosedLoopControl(!compressor.getClosedLoopControl());
+     */
     SmartDashboard.putNumber("Distance", RobotMap.getDistance());
     SmartDashboard.putNumber("Wanted angle", RobotMap.wantedAngle);
     SmartDashboard.putNumber("Elevator height", -RobotMap.elevatorEncoder.getDistance() + 26);
     SmartDashboard.putNumber("Joint angle", RobotMap.angleEncoder.getDistance());
+    SmartDashboard.putNumber("Front Right", RobotMap.frontRightEncoder.getDistance());
+    SmartDashboard.putNumber("Rear Left", RobotMap.rearLeftEncoder.getDistance());
+    SmartDashboard.putNumber("Ortalama",
+        (RobotMap.rearLeftEncoder.getDistance() + RobotMap.frontRightEncoder.getDistance()) / 2);
   }
 
   @Override
@@ -107,12 +114,14 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    Robot.elevator.disable();
+    Robot.joint.disable();
     RobotMap.gyro.reset();
   }
 
   @Override
   public void teleopPeriodic() {
-  Scheduler.getInstance().run();
+    Scheduler.getInstance().run();
   }
 
   @Override
