@@ -60,12 +60,12 @@ public class RobotMap {
   ch b siyah
   toprk kirmizi
  rear left
-  5v kırmızı
+  5v siyah
   ch a kahve
-  ch b siyah
-  toprak turuncu
+  ch b turncu
+  toprak kirmizi>
   */
-  public static Encoder rearLeftEncoder = new Encoder(4,6,true,EncodingType.k4X);
+  public static Encoder rearLeftEncoder = new Encoder(4,5,true,EncodingType.k4X);
   public static Encoder frontRightEncoder = new Encoder(7,8,true,EncodingType.k4X);
   private static double cimPPR = 20;
   public static double cimDPP = (1 / cimPPR) * 4.468;

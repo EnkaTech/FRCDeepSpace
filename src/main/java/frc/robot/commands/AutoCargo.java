@@ -15,6 +15,7 @@ public class AutoCargo extends CommandGroup {
    */
   public AutoCargo(int level) {
     // addSequential(new Align());
+    addSequential(new Approach(90));
     addSequential(new ChangeMode(false));
     switch(level) {
       case 1:
@@ -28,7 +29,7 @@ public class AutoCargo extends CommandGroup {
         break;
       case 3:
         addSequential(new SetElevatorHeight(181));
-        addSequential(new SetJointAngle(33));
+        addSequential(new SetJointAngle(30));
         addSequential(new Intake(0.8), 1.5);
         break;
       
@@ -40,7 +41,7 @@ public class AutoCargo extends CommandGroup {
         break;
     }
     addSequential(new SetJointAngle(0));
-    addSequential(new SetElevatorHeight(26));
+    addSequential(new SetElevatorHeight(29));
     addSequential(new DisableElevator());
     addSequential(new DisableJoint());
     addSequential(new ChangeMode(true));
