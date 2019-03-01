@@ -23,8 +23,8 @@ public class Elevator extends PIDSubsystem {
   private SpeedControllerGroup m_motors = RobotMap.elevatorMotors;
   public Elevator() {
     // Intert a subsystem name and PID values here
-    super("Elevator", -0.17, -0.002, 0);
-    setAbsoluteTolerance(1);
+    super("Elevator", -0.25, -0.002, 0);
+    setAbsoluteTolerance(2);
     setInputRange(-175, 175);
     setOutputRange(-0.6, 0.4);
     // Use these to get going:

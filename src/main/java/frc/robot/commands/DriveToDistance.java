@@ -37,7 +37,7 @@ public class DriveToDistance extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    currentDist = (RobotMap.frontRightEncoder.getDistance() + RobotMap.rearLeftEncoder.getDistance())/2;
+    currentDist = /*(RobotMap.frontRightEncoder.getDistance() + RobotMap.rearLeftEncoder.getDistance())/2*/RobotMap.frontRightEncoder.getDistance();
     error = wantedDist - currentDist;
     power = error * kP;
     if(power > 0  && power < 0.1)
