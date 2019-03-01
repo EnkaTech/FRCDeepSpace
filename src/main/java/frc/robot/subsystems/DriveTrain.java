@@ -117,4 +117,9 @@ public class DriveTrain extends Subsystem {
     Timer.delay(0.0004);
     drive(Math.abs(power), 0, power, false);
   }
+  public void gyroDriveY(ADIS16448_IMU gyro, double power, double wantedAngle) {
+    double angle = (wantedAngle - gyro.getAngleX()) * Kp;
+    drive(power, 0, angle, false);
+    Timer.delay(0.0004);
+  }
 }

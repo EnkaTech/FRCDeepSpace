@@ -13,7 +13,10 @@ import frc.robot.RobotMap;
 
 public class AlignH extends Command {
   float error;
+  double integral = 0;
+  final double kI = -0.00008;
   double power;
+  double wantedAngle;
   double currentAngle;
 
   public AlignH() {
@@ -25,29 +28,33 @@ public class AlignH extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    currentAngle = RobotMap.gyro.getAngleX();
+    
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    currentAngle = RobotMap.gyro.getAngleX();
+    wantedAngle = currentAngle + Robot.table.getEntry("Heading").getDouble(0);
     error = Robot.table.getEntry("Horizontal error").getNumber(0).floatValue();
-    power = -(error * Robot.driveTrain.Kp) / 5;
-    if (power <= 0.05 && power > 0)
-      power = 0.05;
-    else if (power >= 0.3)
-      power = 0.3;
-    else if (power <= -0.3)
-      power = -0.3;
-    else if (power >= -0.05 && power < 0)
-      power = -0.05;
-    Robot.driveTrain.drive(0, power, (currentAngle - RobotMap.gyro.getAngleX()) * Robot.driveTrain.Kp, false);
+    integral += error;
+    power = ((error * Robot.driveTrain.Kp) / -4.4)  /*+(integral * kI)*/;
+    // if (power <= 0.17 && power > 0)
+      // power = 0.17;
+    /*else*/ if (power >= 0.45)
+      power = 0.45;
+    else if (power <= -0.45)
+      power = -0.45;
+    // else if (power >= -0.17 && power < 0)
+      // power = -0.17;
+    Robot.driveTrain.drive(0, power, /*(currentAngle - RobotMap.gyro.getAngleX()) * Robot.driveTrain.Kp*/0, false);
+    // Robot.driveTrain.gyroDriveY(RobotMap.gyro, power, wantedAngle);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Math.abs(error) <= 10;
+    return Math.abs(error) <= 8;
   }
 
   // Called once after isFinished returns true

@@ -24,7 +24,7 @@ public class GripperWheels extends Subsystem {
   }
 
   public void intake(double x) {
-    m_wheel1.set(x);
+    m_wheel1.set(-x);
     m_wheel2.set(x);
   }
 }

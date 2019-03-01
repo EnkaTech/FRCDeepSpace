@@ -9,37 +9,57 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class ManualElevator extends Command {
-  private double m_x;
-  public ManualElevator(double x) {
+public class DriveToDistance extends Command {
+  double currentAngle;
+  double wantedDist;
+  double currentDist;
+  final double kP = 0.01;
+  double error;
+  double power;
+  public DriveToDistance(double dist) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.tElevator);
-    m_x = x;
+    requires(Robot.driveTrain);
+    wantedDist = dist;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    RobotMap.frontRightEncoder.reset();
+    RobotMap.rearLeftEncoder.reset();
+    currentAngle = RobotMap.gyro.getAngleX();
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.tElevator.move(m_x);
+    currentDist = /*(RobotMap.frontRightEncoder.getDistance() + RobotMap.rearLeftEncoder.getDistance())/2*/RobotMap.frontRightEncoder.getDistance();
+    error = wantedDist - currentDist;
+    power = error * kP;
+    if(power > 0  && power < 0.1)
+      power = 0.1;
+    else if(power < 0 && power > -0.1)
+      power = -0.1;
+    else if(power < -0.3)
+      power = -0.3;
+    else if(power > 0.3)
+    Robot.driveTrain.gyroDriveX(RobotMap.gyro, power, currentAngle);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return Math.abs(error) <= 3;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.tElevator.move(0);
+    Robot.driveTrain.drive(0 ,0 ,0 ,false);
   }
 
   // Called when another command which requires one or more of the same

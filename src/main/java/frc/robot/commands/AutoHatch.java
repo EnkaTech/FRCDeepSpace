@@ -17,7 +17,6 @@ public class AutoHatch extends CommandGroup {
     this(level, true);
   }
   public AutoHatch(int level, boolean eject) {
-    //TODO: Asansor yuksekligi ayarlanacak
    // addSequential(new Align());
     addSequential(new ChangeMode(true));
     switch(level) {
@@ -28,12 +27,13 @@ public class AutoHatch extends CommandGroup {
         addSequential(new SetElevatorHeight(105));
         break;
       case 3:
-        addSequential(new SetElevatorHeight(165));
+        addSequential(new SetElevatorHeight(175));
     }
     //Timer.delay(0.2);
     if(eject)
       addSequential(new Eject());
-      addSequential(new SetElevatorHeight(26));
-      addSequential(new DisableElevator());
+
+    addSequential(new SetElevatorHeight(26));
+    addSequential(new DisableElevator());
   }
 }

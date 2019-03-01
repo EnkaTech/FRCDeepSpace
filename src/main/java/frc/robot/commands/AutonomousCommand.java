@@ -16,24 +16,8 @@ public class AutonomousCommand extends CommandGroup {
    * @param choice The method to choose
    */
   public AutonomousCommand(int choice) {
-    switch (choice) {
-    case 2:
-      addSequential(new GyroDriveX(1.3, true, 0));
-      addSequential(new GyroDriveY(2.6, false, 0));
-      addSequential(new GyroDriveX(1.3, false, 0));
-      addSequential(new GyroDriveY(2.6, true, 0));
-      break;
-    case 1:
-    default:
-      // The traditional way
-      addSequential(new GyroDriveX(0.4, true, 0));
-      addSequential(new GyroTurn(90));
-      addSequential(new GyroDriveX(0.8, true, 90));
-      addSequential(new GyroTurn(180));
-      addSequential(new GyroDriveX(0.4, true, 180));
-      addSequential(new GyroTurn(270));
-      addSequential(new GyroDriveX(0.8, true, 270));
-      break;
-    }
+    addSequential(new DriveToDistance(320));
+    addSequential(new GyroTurn(45));
+    addSequential(new DriveToDistance(27));
   }
 }

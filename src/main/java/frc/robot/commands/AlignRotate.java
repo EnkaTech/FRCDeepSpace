@@ -32,7 +32,9 @@ public class AlignRotate extends Command {
     currentAngle = RobotMap.gyro.getAngleX();
     rem = currentAngle % 180;
     wantedAngle = currentAngle - rem;
-    if((error > 0 && rem < 30) || (error < 0 && rem < 90))
+    if(error < 0 && rem < 30)
+      wantedAngle = currentAngle - rem;
+    else if((error > 0 && rem < 30) || (error < 0 && rem < 90))
       wantedAngle += 30;
     else if((error > 0 && rem < 90) || (error < 0 && rem < 150))
       wantedAngle += 90;

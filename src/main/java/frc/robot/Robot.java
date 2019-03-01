@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.cscore.UsbCamera;
+// import edu.wpi.cscore.VideoSink;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -16,7 +17,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.AutonomousCommand;
+// import frc.robot.commands.AutonomousCommand;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.GripperWheels;
@@ -46,14 +47,17 @@ public class Robot extends TimedRobot {
   public static DriveTrain driveTrain = new DriveTrain();
   public static GripperWheels gripperWheels = new GripperWheels();
   public static CameraServer cameraServer;
-  public static UsbCamera camera;
+  //public static VideoSink currentCam;
+  public static UsbCamera visionCam;
+  //public static UsbCamera driverCam;
   public static OI IO;
   SendableChooser<Integer> autoChooser;
+  //boolean usingVision = true;
 
   @Override
   public void robotInit() {
     RobotMap.dtFrontLeft.setInverted(true);
-    //RobotMap.dtRearLeft.setInverted(true);
+    // RobotMap.dtRearLeft.setInverted(true);
     RobotMap.driveTrain = new MecanumDrive(RobotMap.dtFrontLeft, RobotMap.dtRearLeft, RobotMap.dtFrontRight,
         RobotMap.dtRearRight);
     IO = new OI();
@@ -63,20 +67,37 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", autoChooser);
     RobotMap.gyro.calibrate();
     cameraServer = CameraServer.getInstance();
-    camera = cameraServer.startAutomaticCapture();
-    camera.setResolution(640, 480);
+    visionCam = cameraServer.startAutomaticCapture();
+    visionCam.setResolution(640, 480);
+    /*driverCam.setResolution(640, 480);
+    currentCam = cameraServer.getServer();*/
     table = NetworkTableInstance.getDefault().getTable("imgproc");
     RobotMap.elevatorEncoder.setDistancePerPulse(RobotMap.elevatorDPP);
+    RobotMap.rearLeftEncoder.setDistancePerPulse(RobotMap.cimDPP);
+    RobotMap.frontRightEncoder.setDistancePerPulse(RobotMap.cimDPP);
     compressor.setClosedLoopControl(true);
     RobotMap.angleEncoder.setDistancePerPulse(RobotMap.angleDPP);
   }
 
   @Override
   public void robotPeriodic() {
+    /*if(IO.joy2.getRawButton(9)) {
+      if(usingVision)
+        currentCam.setSource(driverCam);
+      else
+        currentCam.setSource(visionCam);
+      
+      usingVision = !usingVision;
+    }*/
+
     SmartDashboard.putNumber("Distance", RobotMap.getDistance());
     SmartDashboard.putNumber("Wanted angle", RobotMap.wantedAngle);
     SmartDashboard.putNumber("Elevator height", -RobotMap.elevatorEncoder.getDistance() + 26);
     SmartDashboard.putNumber("Joint angle", RobotMap.angleEncoder.getDistance());
+    SmartDashboard.putNumber("Front Right", RobotMap.frontRightEncoder.getDistance());
+    SmartDashboard.putNumber("Rear Left", RobotMap.rearLeftEncoder.getDistance());
+    SmartDashboard.putNumber("Ortalama",
+        (RobotMap.rearLeftEncoder.getDistance() + RobotMap.frontRightEncoder.getDistance()) / 2);
   }
 
   @Override
@@ -91,7 +112,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     RobotMap.gyro.reset();
-    new AutonomousCommand(autoChooser.getSelected()).start();
+    //new AutonomousCommand(autoChooser.getSelected()).start();
   }
 
   @Override
@@ -102,16 +123,14 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    Robot.elevator.disable();
+    Robot.joint.disable();
     RobotMap.gyro.reset();
   }
 
   @Override
   public void teleopPeriodic() {
-  if(IO.joy2.getRawButtonPressed(7))
-    compressor.setClosedLoopControl(true);
-  else if(IO.joy2.getRawButtonPressed(8))
-    compressor.setClosedLoopControl(false);
-  Scheduler.getInstance().run();
+    Scheduler.getInstance().run();
   }
 
   @Override
