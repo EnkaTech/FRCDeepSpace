@@ -65,8 +65,8 @@ public class RobotMap {
   ch b turncu
   toprak kirmizi>
   */
-  public static Encoder rearLeftEncoder = new Encoder(4,5,true,EncodingType.k4X);
-  public static Encoder frontRightEncoder = new Encoder(7,8,true,EncodingType.k4X);
+  // public static Encoder rearLeftEncoder = new Encoder(4,5,true,EncodingType.k4X);
+  // public static Encoder frontRightEncoder = new Encoder(7,8,true,EncodingType.k4X);
   private static double cimPPR = 20;
   public static double cimDPP = (1 / cimPPR) * 4.468;
   
@@ -100,7 +100,8 @@ public class RobotMap {
   public static DoubleSolenoid modeSolenoid = new DoubleSolenoid(4, 5);
   public static DoubleSolenoid hatchSolenoid = new DoubleSolenoid(6, 7);
 
-  public static Relay LEDArray = new Relay(0, Relay.Direction.kForward);
+  // public static Relay LEDArray = new Relay(0, Relay.Direction.kForward);
+  public static SpeedController LEDs = new VictorSP(9);
   public static boolean lightsOn = false;
   public static double wantedAngle;
 

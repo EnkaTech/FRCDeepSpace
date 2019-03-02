@@ -64,7 +64,7 @@ public class Robot extends TimedRobot {
     autoChooser = new SendableChooser<Integer>();
     autoChooser.setDefaultOption("Method 1", 1);
     autoChooser.addOption("Method 2", 2);
-    SmartDashboard.putData("Auto mode", autoChooser);
+    // SmartDashboard.putData("Auto mode", autoChooser);
     RobotMap.gyro.calibrate();
     cameraServer = CameraServer.getInstance();
     visionCam = cameraServer.startAutomaticCapture();
@@ -73,8 +73,8 @@ public class Robot extends TimedRobot {
     currentCam = cameraServer.getServer();*/
     table = NetworkTableInstance.getDefault().getTable("imgproc");
     RobotMap.elevatorEncoder.setDistancePerPulse(RobotMap.elevatorDPP);
-    RobotMap.rearLeftEncoder.setDistancePerPulse(RobotMap.cimDPP);
-    RobotMap.frontRightEncoder.setDistancePerPulse(RobotMap.cimDPP);
+    // RobotMap.rearLeftEncoder.setDistancePerPulse(RobotMap.cimDPP);
+    // RobotMap.frontRightEncoder.setDistancePerPulse(RobotMap.cimDPP);
     compressor.setClosedLoopControl(true);
     RobotMap.angleEncoder.setDistancePerPulse(RobotMap.angleDPP);
   }
@@ -91,13 +91,13 @@ public class Robot extends TimedRobot {
     }*/
 
     SmartDashboard.putNumber("Distance", RobotMap.getDistance());
-    SmartDashboard.putNumber("Wanted angle", RobotMap.wantedAngle);
+    // SmartDashboard.putNumber("Wanted angle", RobotMap.wantedAngle);
     SmartDashboard.putNumber("Elevator height", -RobotMap.elevatorEncoder.getDistance() + 26);
     SmartDashboard.putNumber("Joint angle", RobotMap.angleEncoder.getDistance());
-    SmartDashboard.putNumber("Front Right", RobotMap.frontRightEncoder.getDistance());
-    SmartDashboard.putNumber("Rear Left", RobotMap.rearLeftEncoder.getDistance());
-    SmartDashboard.putNumber("Ortalama",
-        (RobotMap.rearLeftEncoder.getDistance() + RobotMap.frontRightEncoder.getDistance()) / 2);
+    // SmartDashboard.putNumber("Front Right", RobotMap.frontRightEncoder.getDistance());
+    // SmartDashboard.putNumber("Rear Left", RobotMap.rearLeftEncoder.getDistance());
+    // SmartDashboard.putNumber("Ortalama",
+        // (RobotMap.rearLeftEncoder.getDistance() + RobotMap.frontRightEncoder.getDistance()) / 2);
   }
 
   @Override

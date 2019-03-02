@@ -24,7 +24,9 @@ public class ToggleLights extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    RobotMap.LEDArray.set(RobotMap.lightsOn ? Relay.Value.kForward : Relay.Value.kOff);
+    // RobotMap.LEDArray.set(RobotMap.lightsOn ? Relay.Value.kForward : Relay.Value.kOff);
+    
+    RobotMap.LEDs.set(RobotMap.lightsOn ? 0.5 : 0.0);
   }
 
   // Make this return true when this Command no longer needs to run execute()

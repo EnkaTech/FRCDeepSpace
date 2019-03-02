@@ -41,10 +41,10 @@ public class AlignH extends Command {
     power = ((error * Robot.driveTrain.Kp) / -4.4)  /*+(integral * kI)*/;
     // if (power <= 0.17 && power > 0)
       // power = 0.17;
-    /*else*/ if (power >= 0.45)
-      power = 0.45;
-    else if (power <= -0.45)
-      power = -0.45;
+    /*else*/ if (power >= 0.35)
+      power = 0.35;
+    else if (power <= -0.35)
+      power = -0.35;
     // else if (power >= -0.17 && power < 0)
       // power = -0.17;
     Robot.driveTrain.drive(0, power, /*(currentAngle - RobotMap.gyro.getAngleX()) * Robot.driveTrain.Kp*/0, false);
