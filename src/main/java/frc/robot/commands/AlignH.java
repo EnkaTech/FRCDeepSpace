@@ -13,8 +13,6 @@ import frc.robot.RobotMap;
 
 public class AlignH extends Command {
   float error;
-  double integral = 0;
-  final double kI = -0.00008;
   double power;
   double wantedAngle;
   double currentAngle;
@@ -28,7 +26,7 @@ public class AlignH extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    
+
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -37,17 +35,12 @@ public class AlignH extends Command {
     currentAngle = RobotMap.gyro.getAngleX();
     wantedAngle = currentAngle + Robot.table.getEntry("Heading").getDouble(0);
     error = Robot.table.getEntry("Horizontal error").getNumber(0).floatValue();
-    integral += error;
-    power = ((error * Robot.driveTrain.Kp) / -4.4)  /*+(integral * kI)*/;
-    // if (power <= 0.17 && power > 0)
-      // power = 0.17;
-    /*else*/ if (power >= 0.35)
+    power = ((error * Robot.driveTrain.Kp) / -4.4);
+    if (power >= 0.35)
       power = 0.35;
     else if (power <= -0.35)
       power = -0.35;
-    // else if (power >= -0.17 && power < 0)
-      // power = -0.17;
-    Robot.driveTrain.drive(0, power, /*(currentAngle - RobotMap.gyro.getAngleX()) * Robot.driveTrain.Kp*/0, false);
+    Robot.driveTrain.drive(0, power, 0, false);
     // Robot.driveTrain.gyroDriveY(RobotMap.gyro, power, wantedAngle);
   }
 

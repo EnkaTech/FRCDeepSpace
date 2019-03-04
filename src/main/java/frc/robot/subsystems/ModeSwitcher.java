@@ -26,8 +26,8 @@ public class ModeSwitcher extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  public void changeMode(boolean hatch){
-    if(hatch)
+  public void changeMode(boolean hatch) {
+    if (hatch)
       m_solenoid.set(DoubleSolenoid.Value.kReverse);
     else
       m_solenoid.set(DoubleSolenoid.Value.kForward);

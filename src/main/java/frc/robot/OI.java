@@ -34,7 +34,7 @@ public class OI {
   public Joystick joy2 = new Joystick(1);
   public Button j1_3 = new JoystickButton(joy1, 3);
   public Button j1_11 = new JoystickButton(joy1, 11);
-  public Button j1_9  = new JoystickButton(joy1, 9);
+  public Button j1_9 = new JoystickButton(joy1, 9);
   public Button j1_10 = new JoystickButton(joy1, 10);
   public Button j1_7 = new JoystickButton(joy1, 7);
   public Button j1_8 = new JoystickButton(joy1, 8);
@@ -54,7 +54,6 @@ public class OI {
   public Button j2_10 = new JoystickButton(joy2, 10);
   public Button j2_11 = new JoystickButton(joy2, 11);
   public Button j2_12 = new JoystickButton(joy2, 12);
-
 
   public OI() {
     j1_3.whenPressed(new ChangeMode(true));

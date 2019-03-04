@@ -32,7 +32,6 @@ public class GyroDriveY extends TimedCommand {
     this.angle = angle;
   }
 
-
   @Override
   protected void initialize() {
   }

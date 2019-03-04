@@ -18,12 +18,14 @@ public class TempJoint extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   private SpeedController m_motor = RobotMap.jointMotor;
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
-  public void move(double x){
+
+  public void move(double x) {
     m_motor.set(x);
   }
 }

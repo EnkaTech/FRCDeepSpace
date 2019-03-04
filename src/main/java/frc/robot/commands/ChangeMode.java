@@ -12,6 +12,7 @@ import frc.robot.Robot;
 
 public class ChangeMode extends Command {
   private boolean m_hatch;
+
   public ChangeMode(boolean hatch) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);

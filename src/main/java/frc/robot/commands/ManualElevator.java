@@ -12,6 +12,7 @@ import frc.robot.Robot;
 
 public class ManualElevator extends Command {
   private double m_x;
+
   public ManualElevator(double x) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);

@@ -21,6 +21,7 @@ public class JointMotor extends PIDSubsystem {
    */
   private Encoder m_encoder = RobotMap.angleEncoder;
   private SpeedController m_motor = RobotMap.jointMotor;
+
   public JointMotor() {
     // Intert a subsystem name and PID values here
     super("Angle Motor", 0.15, 0.001, 0);

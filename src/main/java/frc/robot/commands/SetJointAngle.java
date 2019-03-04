@@ -12,6 +12,7 @@ import frc.robot.Robot;
 
 public class SetJointAngle extends Command {
   private double m_angle;
+
   public SetJointAngle(double angle) {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.joint);

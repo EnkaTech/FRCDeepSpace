@@ -12,12 +12,11 @@ import frc.robot.Robot;
 
 public class Intake extends Command {
   private double power;
-  
-  public Intake(double p){
+
+  public Intake(double p) {
     requires(Robot.gripperWheels);
     power = p;
   }
-
 
   // Called just before this Command runs the first time
   @Override
@@ -28,11 +27,9 @@ public class Intake extends Command {
   @Override
   protected void execute() {
     /*
-    if(out)
-      Robot.gripperWheels.intake(0.7);
-    else
-      Robot.gripperWheels.intake(-0.7);
-      */
+     * if(out) Robot.gripperWheels.intake(0.7); else
+     * Robot.gripperWheels.intake(-0.7);
+     */
     Robot.gripperWheels.intake(power);
   }
 

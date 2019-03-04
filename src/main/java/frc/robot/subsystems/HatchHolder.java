@@ -21,13 +21,14 @@ public class HatchHolder extends Subsystem {
   // here. Call these from Commands.
 
   private DoubleSolenoid m_solenoid = RobotMap.hatchSolenoid;
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  public void eject(){
+  public void eject() {
     m_solenoid.set(Value.kForward);
     Timer.delay(0.5);
     m_solenoid.set(Value.kReverse);

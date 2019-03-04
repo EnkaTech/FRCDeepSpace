@@ -12,6 +12,7 @@ import frc.robot.Robot;
 
 public class ManualJoint extends Command {
   private double a;
+
   public ManualJoint(double x) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
