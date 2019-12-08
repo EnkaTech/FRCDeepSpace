@@ -10,7 +10,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -41,35 +40,18 @@ public class RobotMap {
   public static double map(double x, double in_min, double in_max, double out_min, double out_max) {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   }
+
   // Sensorler
   private static AnalogInput rangeInput = new AnalogInput(0);
   // Elevator encoder (AMT-103V)
   public static Encoder elevatorEncoder = new Encoder(0, 1, false, EncodingType.k4X);
-  // 1 tur = 3.224cm 
+  // 1 tur = 3.224cm
   private static double elevatorPPR = 2048;
   public static double elevatorDPP = (1 / elevatorPPR) * 6.2;
   // Angle encoder (Hall effect)
   public static Encoder angleEncoder = new Encoder(2, 3, true, EncodingType.k4X);
   private static double anglePPR = 7;
   public static double angleDPP = (1 / anglePPR) * 0.74;
-  //4.468 = 1 tur cimcoder 20 ppr
-  /*
-  front right
-  5v turuncu
-  ch a kahve
-  ch b siyah
-  toprk kirmizi
- rear left
-  5v siyah
-  ch a kahve
-  ch b turncu
-  toprak kirmizi>
-  */
-  public static Encoder rearLeftEncoder = new Encoder(4,5,true,EncodingType.k4X);
-  public static Encoder frontRightEncoder = new Encoder(7,8,true,EncodingType.k4X);
-  private static double cimPPR = 20;
-  public static double cimDPP = (1 / cimPPR) * 4.468;
-  
 
   public static double getDistance() {
     double dist = rangeInput.getVoltage();
@@ -100,12 +82,12 @@ public class RobotMap {
   public static DoubleSolenoid modeSolenoid = new DoubleSolenoid(4, 5);
   public static DoubleSolenoid hatchSolenoid = new DoubleSolenoid(6, 7);
 
-  public static Relay LEDArray = new Relay(0, Relay.Direction.kForward);
+  public static SpeedController LEDs = new VictorSP(9);
   public static boolean lightsOn = false;
   public static double wantedAngle;
 
   public static MecanumDrive driveTrain;
-  public static double fastSpd = 0.5;
-  public static double slowSpd = 0.2;
+  public static double fastSpd = 0.8;
+  public static double slowSpd = 0.4;
 
 }
