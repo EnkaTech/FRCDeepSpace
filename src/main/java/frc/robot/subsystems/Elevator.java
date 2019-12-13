@@ -19,7 +19,7 @@ public class Elevator extends PIDSubsystem {
   /**
    * Add your docs here.
    */
-  private Encoder m_encoder = RobotMap.elevatorEncoder;
+  private Encoder e_encoder = RobotMap.elevatorEncoder;
   private SpeedControllerGroup m_motors = RobotMap.elevatorMotors;
   public Elevator() {
     // Intert a subsystem name and PID values here
@@ -44,7 +44,7 @@ public class Elevator extends PIDSubsystem {
     // Return your input value for the PID loop
     // e.g. a sensor, like a potentiometer:
     // yourPot.getAverageVoltage() / kYourMaxVoltage;
-    return -m_encoder.getDistance();    
+    return -e_encoder.getDistance();    
   }
 
   @Override
